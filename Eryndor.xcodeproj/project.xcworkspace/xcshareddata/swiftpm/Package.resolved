@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "grdb.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "git@github.com:groue/GRDB.swift.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "ba2e3cb4686733a629948db3ae75798d370039b5"
+      }
+    },
+    {
       "identity" : "swinject",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Swinject/Swinject.git",

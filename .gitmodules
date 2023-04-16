@@ -1,0 +1,6 @@
+[submodule "Frameworks/ASKDesignSystem"]
+	path = Frameworks/ASKDesignSystem
+	url = git@github.com:skorulis/ASKDesignSystem.git
+[submodule "Frameworks/ASKCore"]
+	path = Frameworks/ASKCore
+	url = git@github.com:skorulis/ASKCore.git

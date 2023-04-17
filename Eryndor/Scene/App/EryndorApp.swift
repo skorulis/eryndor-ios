@@ -9,8 +9,10 @@ struct EryndorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.factory, ioc)
+            WindowSizeView {
+                ContentView()
+                    .environment(\.factory, ioc)
+            }
         }
     }
 }

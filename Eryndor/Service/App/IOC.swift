@@ -8,6 +8,11 @@ final class IOC: IOCService {
     override init(purpose: IOCPurpose = .testing) {
         super.init(purpose: purpose)
         registerStores()
+        registerViewModels()
+    }
+    
+    private func registerViewModels() {
+        container.autoregister(MapViewModel.self, initializer: MapViewModel.init)
     }
     
     private func registerStores() {

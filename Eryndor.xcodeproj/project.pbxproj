@@ -19,6 +19,10 @@
 		FA62FDD429EBACB800A02335 /* SQLMigrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDD329EBACB800A02335 /* SQLMigrations.swift */; };
 		FA62FDD629EBADC000A02335 /* ASKCore in Frameworks */ = {isa = PBXBuildFile; productRef = FA62FDD529EBADC000A02335 /* ASKCore */; };
 		FA62FDD829EBADC000A02335 /* ASKDesignSystem in Frameworks */ = {isa = PBXBuildFile; productRef = FA62FDD729EBADC000A02335 /* ASKDesignSystem */; };
+		FA62FDDB29EBBA1900A02335 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDDA29EBBA1900A02335 /* MapView.swift */; };
+		FA62FDDD29EBBA1D00A02335 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDDC29EBBA1D00A02335 /* MapViewModel.swift */; };
+		FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */; };
+		FA99707229ED2EF9007C3211 /* MapSquare.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99707129ED2EF9007C3211 /* MapSquare.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +37,10 @@
 		FA62FDC829EBA28200A02335 /* IOC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOC.swift; sourceTree = "<group>"; };
 		FA62FDD129EBACB100A02335 /* SQLStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLStore.swift; sourceTree = "<group>"; };
 		FA62FDD329EBACB800A02335 /* SQLMigrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLMigrations.swift; sourceTree = "<group>"; };
+		FA62FDDA29EBBA1900A02335 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		FA62FDDC29EBBA1D00A02335 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeView.swift; sourceTree = "<group>"; };
+		FA99707129ED2EF9007C3211 /* MapSquare.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSquare.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				FA62FDB129EBA1E400A02335 /* Config */,
+				FA99706F29ED2EE8007C3211 /* Model */,
 				FA62FDB829EBA1E400A02335 /* Resource */,
 				FA62FDB429EBA1E400A02335 /* Scene */,
 				FA62FDB329EBA1E400A02335 /* Service */,
@@ -98,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				FA62FDB529EBA1E400A02335 /* App */,
+				FA99706C29ECA3F5007C3211 /* Util */,
+				FA62FDD929EBBA1100A02335 /* World */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -160,6 +171,39 @@
 				FA62FDD329EBACB800A02335 /* SQLMigrations.swift */,
 			);
 			path = SQL;
+			sourceTree = "<group>";
+		};
+		FA62FDD929EBBA1100A02335 /* World */ = {
+			isa = PBXGroup;
+			children = (
+				FA62FDDA29EBBA1900A02335 /* MapView.swift */,
+				FA62FDDC29EBBA1D00A02335 /* MapViewModel.swift */,
+			);
+			path = World;
+			sourceTree = "<group>";
+		};
+		FA99706C29ECA3F5007C3211 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		FA99706F29ED2EE8007C3211 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FA99707029ED2EF4007C3211 /* Map */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		FA99707029ED2EF4007C3211 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				FA99707129ED2EF9007C3211 /* MapSquare.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,9 +287,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA62FDD429EBACB800A02335 /* SQLMigrations.swift in Sources */,
+				FA62FDDB29EBBA1900A02335 /* MapView.swift in Sources */,
 				FA62FDBD29EBA1E400A02335 /* ContentView.swift in Sources */,
 				FA62FDD229EBACB100A02335 /* SQLStore.swift in Sources */,
+				FA62FDDD29EBBA1D00A02335 /* MapViewModel.swift in Sources */,
+				FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */,
 				FA62FDBC29EBA1E400A02335 /* EryndorApp.swift in Sources */,
+				FA99707229ED2EF9007C3211 /* MapSquare.swift in Sources */,
 				FA62FDC929EBA28200A02335 /* IOC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

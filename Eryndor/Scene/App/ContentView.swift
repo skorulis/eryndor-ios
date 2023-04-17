@@ -8,19 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @Environment(\.factory) private var factory
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            MapView(viewModel: factory.resolve())
         }
-        .padding()
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        let ioc = IOC()
+        return ContentView()
+            .environment(\.factory, ioc)
     }
 }

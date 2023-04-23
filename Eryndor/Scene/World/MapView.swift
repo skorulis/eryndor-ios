@@ -1,6 +1,7 @@
 //Created by Alexander Skorulis on 16/4/2023.
 
 import Foundation
+import SpriteKit
 import SwiftUI
 
 // MARK: - Memory footprint
@@ -8,10 +9,14 @@ import SwiftUI
 struct MapView {
     @StateObject var viewModel: MapViewModel
     @Environment(\.windowSize) private var windowSize
+    private let scene = MapScene()
+    
+    @State private var dragOffset = CGSize.zero
     
     init(viewModel: MapViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        viewModel.windowSize = windowSize
+        scene.size = CGSize(width: 300, height: 300)
+        scene.scaleMode = .fill
     }
 }
 
@@ -20,6 +25,15 @@ struct MapView {
 extension MapView: View {
     
     var body: some View {
+        skContent
+            
+    }
+    
+    private var skContent: some View {
+        SpriteView(scene: scene)
+    }
+    
+    private var content: some View {
         grid
             .frame(width: windowSize.width, height: windowSize.height)
             .onChange(of: windowSize) { newValue in
@@ -33,7 +47,7 @@ extension MapView: View {
             ForEach(viewModel.rows) { row in
                 HStack(spacing: 0) {
                     ForEach(row.squares) { square in
-                        Text("A")
+                        Text(square.id)
                             .frame(width: MapViewModel.squareSize, height: MapViewModel.squareSize)
                             .border(Color.black)
                     }

@@ -4,25 +4,25 @@ import Foundation
 
 final class MapViewModel: ObservableObject {
     
-    var windowSize: CGSize = .zero
+    var windowSize: CGSize = .zero {
+        didSet {
+            reloadData()
+        }
+    }
+    
+    @Published var topLeft: Coord = .init(x: -10, y: -10) {
+        didSet {
+            reloadData()
+        }
+    }
     
     @Published var rows: [MapRow] = []
     
     static let squareSize: CGFloat = 32
     
     init() {
-        rows = [
-            MapRow(squares: [
-                .init(),
-                .init(),
-                .init()
-            ]),
-            MapRow(squares: [
-                .init(),
-                .init(),
-                .init()
-            ])
-        ]
+        reloadData()
+        
     }
     
 }
@@ -40,3 +40,17 @@ extension MapViewModel {
         return Int(ceil(value))
     }
 }
+
+// MARK: - Logic
+
+extension MapViewModel {
+    func reloadData() {
+        self.rows = (topLeft.y..<topLeft.y + ySquares).map { y in
+            let squares = (topLeft.x..<topLeft.x + xSquares).map { x in
+                return MapSquare(x: x, y: y)
+            }
+            return MapRow(squares: squares)
+        }
+    }
+}
+

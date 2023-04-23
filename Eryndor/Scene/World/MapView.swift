@@ -11,14 +11,10 @@ struct MapView {
     @Environment(\.windowSize) private var windowSize
     private let scene = MapScene()
     
-    @State private var dragOffset = CGSize.zero
-    
     @State private var originalTranslation: CGPoint?
     
     init(viewModel: MapViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
-        scene.size = CGSize(width: 300, height: 300)
-        scene.scaleMode = .fill
     }
 }
 
@@ -28,20 +24,27 @@ extension MapView: View {
     
     var body: some View {
         skContent
-            .gesture(
-                DragGesture()
-                    .onChanged{ value in
-                        if originalTranslation == nil {
-                            originalTranslation = scene.map.position
-                        }
-                        scene.map.position = CGPoint(
-                            x: originalTranslation!.x + value.translation.width,
-                            y: originalTranslation!.y - value.translation.height)
-                    }
-                    .onEnded { value in
-                        self.originalTranslation = nil
-                    }
-            )
+            .gesture(dragGesture)
+            .onTapGesture { location in
+                let coord = scene.coord(position: location)
+                print(location)
+                print(coord)
+            }
+    }
+    
+    private var dragGesture: some Gesture {
+        DragGesture()
+            .onChanged{ value in
+                if originalTranslation == nil {
+                    originalTranslation = scene.map.position
+                }
+                scene.map.position = CGPoint(
+                    x: originalTranslation!.x + value.translation.width,
+                    y: originalTranslation!.y - value.translation.height)
+            }
+            .onEnded { value in
+                self.originalTranslation = nil
+            }
     }
     
     private var skContent: some View {

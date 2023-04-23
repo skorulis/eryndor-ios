@@ -8,24 +8,21 @@ import AppKit
 class MapScene: SKScene {
     
     let map = SKNode()
+    private let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
+    let tileSize = CGSize(width: 128, height: 128)
+    let columns = 128
+    let rows = 128
+    lazy var bottomLayer = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: tileSize)
     
     override func didMove(to view: SKView) {
-        
-        
         addChild(map)
         map.xScale = 0.2
         map.yScale = 0.2
-        
-        let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
-        let tileSize = CGSize(width: 128, height: 128)
-        let columns = 128
-        let rows = 128
         
         let waterTiles = tileSet.tileGroups.first { $0.name == "Water" }
         let grassTiles = tileSet.tileGroups.first { $0.name == "Grass"}
         let sandTiles = tileSet.tileGroups.first { $0.name == "Sand"}
         
-        let bottomLayer = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: tileSize)
         bottomLayer.fill(with: sandTiles)
         map.addChild(bottomLayer)
         
@@ -53,6 +50,16 @@ class MapScene: SKScene {
                 }
             }
         }
+    }
+    
+    func coord(position: CGPoint) -> Coord {
+        var adjusted = CGPoint(x: position.x - map.position.x, y: position.y + map.position.y)
+        adjusted.x /= map.xScale
+        adjusted.y /= map.yScale
+        let x = bottomLayer.tileColumnIndex(fromPosition: adjusted)
+        let y = bottomLayer.tileRowIndex(fromPosition: adjusted)
+        // Temporary adjustment to fix some strange bug in the coordinate system
+        return Coord(x: x, y: y - 30)
     }
     
     func makeNoiseMap(columns: Int, rows: Int) -> GKNoiseMap {

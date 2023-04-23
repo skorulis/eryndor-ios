@@ -13,6 +13,8 @@ struct MapView {
     
     @State private var dragOffset = CGSize.zero
     
+    @State private var originalTranslation: CGPoint?
+    
     init(viewModel: MapViewModel) {
         _viewModel = StateObject(wrappedValue: viewModel)
         scene.size = CGSize(width: 300, height: 300)
@@ -26,11 +28,33 @@ extension MapView: View {
     
     var body: some View {
         skContent
-            
+            .gesture(
+                DragGesture()
+                    .onChanged{ value in
+                        if originalTranslation == nil {
+                            originalTranslation = scene.map.position
+                        }
+                        scene.map.position = CGPoint(
+                            x: originalTranslation!.x + value.translation.width,
+                            y: originalTranslation!.y - value.translation.height)
+                    }
+                    .onEnded { value in
+                        self.originalTranslation = nil
+                    }
+            )
     }
     
     private var skContent: some View {
-        SpriteView(scene: scene)
+        ZStack {
+            Color.blue
+            SpriteView(scene: scene)
+                .allowsHitTesting(false)
+                .onChange(of: windowSize) { newValue in
+                    scene.size = newValue
+                    viewModel.windowSize = newValue
+                }
+        }
+        
     }
     
     private var content: some View {

@@ -9,7 +9,6 @@ import SwiftUI
 struct MapView {
     @StateObject var viewModel: MapViewModel
     @Environment(\.windowSize) private var windowSize
-    private let scene = MapScene()
     
     @State private var originalTranslation: CGPoint?
     
@@ -25,20 +24,24 @@ extension MapView: View {
     var body: some View {
         skContent
             .gesture(dragGesture)
-            .onTapGesture { location in
-                let coord = scene.coord(position: location)
-                print(location)
-                print(coord)
+            .onTapGesture(perform: viewModel.tap)
+    }
+    
+    private var paintGesture: some Gesture {
+        DragGesture()
+            .onChanged{ value in
+                viewModel.tap(location: value.location)
             }
+            .modifiers(.command)
     }
     
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged{ value in
                 if originalTranslation == nil {
-                    originalTranslation = scene.map.position
+                    originalTranslation = viewModel.scene.map.position
                 }
-                scene.map.position = CGPoint(
+                viewModel.scene.map.position = CGPoint(
                     x: originalTranslation!.x + value.translation.width,
                     y: originalTranslation!.y - value.translation.height)
             }
@@ -50,10 +53,12 @@ extension MapView: View {
     private var skContent: some View {
         ZStack {
             Color.blue
-            SpriteView(scene: scene)
+                //.frame(width: 8000, height: 8000)
+            SpriteView(scene: viewModel.scene, debugOptions: [.showsFPS])
+                .contentShape(Rectangle())
                 .allowsHitTesting(false)
                 .onChange(of: windowSize) { newValue in
-                    scene.size = newValue
+                    viewModel.scene.size = newValue
                     viewModel.windowSize = newValue
                 }
         }

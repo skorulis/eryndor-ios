@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		FA0C95D529F3BBD700388C9D /* MapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0C95D429F3BBD700388C9D /* MapScene.swift */; };
 		FA0C95D729F4B35500388C9D /* MapTileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA0C95D629F4B35500388C9D /* MapTileSet.sks */; };
+		FA241C6C29F6821100865FDE /* ScrollViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA241C6B29F6821100865FDE /* ScrollViewWrapper.swift */; };
+		FA241C6E29F73FBC00865FDE /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA241C6D29F73FBC00865FDE /* MapNode.swift */; };
 		FA62FDBC29EBA1E400A02335 /* EryndorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDB629EBA1E400A02335 /* EryndorApp.swift */; };
 		FA62FDBD29EBA1E400A02335 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDB729EBA1E400A02335 /* ContentView.swift */; };
 		FA62FDBE29EBA1E400A02335 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA62FDB929EBA1E400A02335 /* Assets.xcassets */; };
 		FA62FDBF29EBA1E400A02335 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA62FDBB29EBA1E400A02335 /* Preview Assets.xcassets */; };
-		FA62FDC329EBA25E00A02335 /* ASKCore in Resources */ = {isa = PBXBuildFile; fileRef = FA62FDC129EBA25E00A02335 /* ASKCore */; };
 		FA62FDC429EBA25E00A02335 /* ASKDesignSystem in Resources */ = {isa = PBXBuildFile; fileRef = FA62FDC229EBA25E00A02335 /* ASKDesignSystem */; };
 		FA62FDC929EBA28200A02335 /* IOC.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA62FDC829EBA28200A02335 /* IOC.swift */; };
 		FA62FDCC29EBAC1400A02335 /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = FA62FDCB29EBAC1400A02335 /* GRDB */; };
@@ -31,13 +32,15 @@
 /* Begin PBXFileReference section */
 		FA0C95D429F3BBD700388C9D /* MapScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScene.swift; sourceTree = "<group>"; };
 		FA0C95D629F4B35500388C9D /* MapTileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MapTileSet.sks; sourceTree = "<group>"; };
+		FA241C6A29F6740E00865FDE /* ASKCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ASKCore; sourceTree = "<group>"; };
+		FA241C6B29F6821100865FDE /* ScrollViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewWrapper.swift; sourceTree = "<group>"; };
+		FA241C6D29F73FBC00865FDE /* MapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
 		FA62FD9F29EBA1B600A02335 /* Eryndor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Eryndor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA62FDB229EBA1E400A02335 /* Eryndor.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Eryndor.entitlements; sourceTree = "<group>"; };
 		FA62FDB629EBA1E400A02335 /* EryndorApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EryndorApp.swift; sourceTree = "<group>"; };
 		FA62FDB729EBA1E400A02335 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FA62FDB929EBA1E400A02335 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA62FDBB29EBA1E400A02335 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		FA62FDC129EBA25E00A02335 /* ASKCore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ASKCore; sourceTree = "<group>"; };
 		FA62FDC229EBA25E00A02335 /* ASKDesignSystem */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ASKDesignSystem; sourceTree = "<group>"; };
 		FA62FDC829EBA28200A02335 /* IOC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IOC.swift; sourceTree = "<group>"; };
 		FA62FDD129EBACB100A02335 /* SQLStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SQLStore.swift; sourceTree = "<group>"; };
@@ -149,7 +152,7 @@
 		FA62FDC029EBA25E00A02335 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FA62FDC129EBA25E00A02335 /* ASKCore */,
+				FA241C6A29F6740E00865FDE /* ASKCore */,
 				FA62FDC229EBA25E00A02335 /* ASKDesignSystem */,
 			);
 			path = Frameworks;
@@ -186,6 +189,7 @@
 				FA0C95D429F3BBD700388C9D /* MapScene.swift */,
 				FA62FDDA29EBBA1900A02335 /* MapView.swift */,
 				FA62FDDC29EBBA1D00A02335 /* MapViewModel.swift */,
+				FA241C6D29F73FBC00865FDE /* MapNode.swift */,
 			);
 			path = World;
 			sourceTree = "<group>";
@@ -194,6 +198,7 @@
 			isa = PBXGroup;
 			children = (
 				FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */,
+				FA241C6B29F6821100865FDE /* ScrollViewWrapper.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -289,7 +294,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA62FDC329EBA25E00A02335 /* ASKCore in Resources */,
 				FA0C95D729F4B35500388C9D /* MapTileSet.sks in Resources */,
 				FA62FDC429EBA25E00A02335 /* ASKDesignSystem in Resources */,
 				FA62FDBF29EBA1E400A02335 /* Preview Assets.xcassets in Resources */,
@@ -304,11 +308,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA241C6E29F73FBC00865FDE /* MapNode.swift in Sources */,
 				FA62FDD429EBACB800A02335 /* SQLMigrations.swift in Sources */,
 				FA99707529EE675B007C3211 /* Coord.swift in Sources */,
 				FA62FDDB29EBBA1900A02335 /* MapView.swift in Sources */,
 				FA62FDBD29EBA1E400A02335 /* ContentView.swift in Sources */,
 				FA62FDD229EBACB100A02335 /* SQLStore.swift in Sources */,
+				FA241C6C29F6821100865FDE /* ScrollViewWrapper.swift in Sources */,
 				FA62FDDD29EBBA1D00A02335 /* MapViewModel.swift in Sources */,
 				FA0C95D529F3BBD700388C9D /* MapScene.swift in Sources */,
 				FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */,
@@ -518,8 +524,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:groue/GRDB.swift.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = revision;
+				revision = 1cd20176c6dea4d35da34fb4c2aaa3be541be217;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

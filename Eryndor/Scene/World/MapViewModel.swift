@@ -20,6 +20,8 @@ final class MapViewModel: ObservableObject {
     
     static let squareSize: CGFloat = 32
     
+    let scene = MapScene()
+    
     init() {
         reloadData()
         
@@ -44,6 +46,14 @@ extension MapViewModel {
 // MARK: - Logic
 
 extension MapViewModel {
+    
+    func tap(location: CGPoint) {
+        let converted = CGPoint(x: location.x, y: scene.size.height - location.y)
+        let coord = scene.coord(position: converted)
+        
+        scene.map.topLayer.setTileGroup(scene.map.cobblestone, forColumn: coord.x, row: coord.y)
+    }
+    
     func reloadData() {
         self.rows = (topLeft.y..<topLeft.y + ySquares).map { y in
             let squares = (topLeft.x..<topLeft.x + xSquares).map { x in

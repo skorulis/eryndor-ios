@@ -38,11 +38,12 @@ extension TerrainDataManager {
     }
     
     func block(for coord: Coord) async -> TerrainBlockRecord {
-        if let value = backingData[coord] {
+        let rounded = coord.align(gridSize: TerrainBlock.blockSize)
+        if let value = backingData[rounded] {
             return value
         }
-        let found = await self.load(coord: coord)
-        self.backingData[coord] = found
+        let found = await self.load(coord: rounded)
+        self.backingData[rounded] = found
         return found
     }
     

@@ -58,7 +58,6 @@ extension MapView: View {
     private var skContent: some View {
         ZStack {
             Color.blue
-                //.frame(width: 8000, height: 8000)
             SpriteView(scene: viewModel.scene, debugOptions: [.showsFPS])
                 .contentShape(Rectangle())
                 .allowsHitTesting(false)

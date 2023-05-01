@@ -6,44 +6,30 @@ import SpriteKit
 
 final class MapNode: SKNode {
     
-    let tileProvider = TileProvider()
-    let tileSize = CGSize(width: 128, height: 128)
+    let tileProvider = TopTileProvider()
+    let bottomTileProvider = BottomTileProvider()
+    let tileSize = CGSize(width: TopTileProvider.tileSize, height: TopTileProvider.tileSize)
     let columns = TerrainBlock.blockSize
     let rows = TerrainBlock.blockSize
-    lazy var bottomLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
-    lazy var topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+    let bottomLayer: SKTileMapNode
+    let topLayer: SKTileMapNode
     
     override init() {
-        super.init()
-        //bottomLayer.fill(with: sandTiles)
-        addChild(bottomLayer)
+        bottomLayer = SKTileMapNode(tileSet: bottomTileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+        topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         
-        // create the noise map
-        let noiseMap = makeNoiseMap(columns: columns, rows: rows)
+        super.init()
+        addChild(bottomLayer)
 
         // make SpriteKit do the work of placing specific tiles
         topLayer.enableAutomapping = true
 
         // add the grass/water layer to our main map node
         addChild(topLayer)
-        
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func makeNoiseMap(columns: Int, rows: Int) -> GKNoiseMap {
-        let source = GKPerlinNoiseSource()
-        source.persistence = 0.9
-
-        let noise = GKNoise(source)
-        let size = vector2(1.0, 1.0)
-        let origin = vector2(0.0, 0.0)
-        let sampleCount = vector2(Int32(columns), Int32(rows))
-
-        return GKNoiseMap(noise, size: size, origin: origin, sampleCount: sampleCount, seamless: true)
     }
     
     func apply(block: TerrainBlockRecord) {
@@ -51,7 +37,7 @@ final class MapNode: SKNode {
             let row = block.block.rows[i]
             for j in 0..<row.squares.count {
                 let square = row.squares[j]
-                bottomLayer.setTileGroup(tileProvider.tile(for: square.bottom), forColumn: j, row: i)
+                bottomLayer.setTileGroup(bottomTileProvider.tile(for: square.bottom), forColumn: j, row: i)
                 if let top = square.top {
                     topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)
                 }

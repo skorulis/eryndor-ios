@@ -44,7 +44,7 @@ extension MapViewModel {
         print(coord)
         
         Task {
-            let tileGroup = scene.map.tileProvider.tile(for: brushType)
+            let tileGroup = tileProvider.tile(for: brushType)
             var block = await terrainManager.block(for: coord)
             var square = block.square(at: coord)
             switch layer {
@@ -58,6 +58,15 @@ extension MapViewModel {
             block.set(square: square, at: coord)
             
             await terrainManager.save(block: block)
+        }
+    }
+    
+    private var tileProvider: TileProvider {
+        switch layer {
+        case .bottom:
+            return scene.map.bottomTileProvider
+        case .top:
+            return scene.map.tileProvider
         }
     }
     

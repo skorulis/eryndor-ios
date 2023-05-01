@@ -11,7 +11,6 @@ actor TerrainDataManager: ObservableObject {
     
     init(sqlStore: SQLStore) {
         self.sqlStore = sqlStore
-        backingData[.zero] = TerrainBlockRecord(coord: .zero, bottomTerrain: .grass)
     }
 }
 
@@ -48,6 +47,7 @@ extension TerrainDataManager {
     }
     
     func save(block: TerrainBlockRecord) async {
+        self.backingData[block.coord] = block
         try! await sqlStore.dbQueue.write { db in
             try block.update(db)
         }

@@ -44,6 +44,10 @@ extension MapViewModel {
         
         Task {
             var block = await terrainManager.block(for: coord)
+            var square = block.square(at: coord)
+            square.top = .stone
+            block.set(square: square, at: coord)
+            
             await terrainManager.save(block: block)
         }
     }

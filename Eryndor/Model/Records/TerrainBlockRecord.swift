@@ -9,16 +9,34 @@ struct TerrainBlockRecord: Codable, Identifiable {
     // Top left coordinates
     let x: Int
     let y: Int
-    let block: TerrainBlock
+    var block: TerrainBlock
     
-    var id: String {
-        return Coord(x: x, y: y).id
-    }
+    var id: String { return coord.id }
+    var coord: Coord { Coord(x: x, y: y) }
     
     init(coord: Coord, bottomTerrain: BaseTerrainType) {
         self.x = coord.x
         self.y = coord.y
         self.block = TerrainBlock(bottomTerrain: bottomTerrain)
+    }
+    
+    func square(at: Coord) -> MapSquare {
+        let l = local(coord: at)
+        return block.rows[l.y].squares[l.x]
+    }
+    
+    private func local(coord: Coord) -> Coord {
+        let i = coord.x - x
+        let j = coord.y - y
+        guard i < TerrainBlock.blockSize, j < TerrainBlock.blockSize, i >= 0, j >= 0 else {
+            fatalError("\(coord) does not live within block at \(self.coord)")
+        }
+        return Coord(x: i, y: j)
+    }
+    
+    mutating func set(square: MapSquare, at: Coord) {
+        let l = local(coord: at)
+        block.rows[l.y].squares[l.x] = square
     }
     
 }
@@ -42,17 +60,15 @@ extension TerrainBlockRecord: FetchableRecord {
     
 }
 
-
-
 struct TerrainBlock: Codable {
     
     static let blockSize: Int = 128
     
-    let rows: [MapRow]
+    var rows: [MapRow]
     
     init(bottomTerrain: BaseTerrainType) {
         let squares = (0..<Self.blockSize).map { _ in
-            return MapSquare(layers: [bottomTerrain])
+            return MapSquare(bottom: bottomTerrain, top: nil)
         }
         rows = (0..<Self.blockSize).map { _ in
             return MapRow(squares: squares)
@@ -63,9 +79,11 @@ struct TerrainBlock: Codable {
 }
 
 struct MapRow: Codable {
-    let squares: [MapSquare]
+    var squares: [MapSquare]
 }
 
 struct MapSquare: Codable {
-    let layers: [BaseTerrainType]
+    
+    var bottom: BaseTerrainType
+    var top: BaseTerrainType?
 }

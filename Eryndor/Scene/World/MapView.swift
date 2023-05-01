@@ -22,9 +22,14 @@ struct MapView {
 extension MapView: View {
     
     var body: some View {
-        skContent
-            .gesture(dragGesture)
-            .onTapGesture(perform: viewModel.tap)
+        ZStack {
+            skContent
+                .gesture(dragGesture)
+                .onTapGesture(perform: viewModel.tap)
+            
+            controlsOverlay
+        }
+        
     }
     
     private var paintGesture: some Gesture {
@@ -63,6 +68,36 @@ extension MapView: View {
                 }
         }
         
+    }
+    
+    private var controlsOverlay: some View {
+        VStack(alignment: .leading) {
+            Spacer()
+            terrainPicker
+            layerPicker
+        }
+    }
+    
+    private var layerPicker: some View {
+        Picker("", selection: $viewModel.layer) {
+            ForEach(MapLayer.allCases) { layer in
+                Text(layer.rawValue)
+                    .tag(layer)
+            }
+        }
+        .pickerStyle(.menu)
+        .frame(width: 150)
+    }
+    
+    private var terrainPicker: some View {
+        Picker("", selection: $viewModel.brushType) {
+            ForEach(BaseTerrainType.allCases) { type in
+                Text(type.name)
+                    .tag(type)
+            }
+        }
+        .pickerStyle(.menu)
+        .frame(width: 150)
     }
     
 }

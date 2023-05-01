@@ -10,6 +10,9 @@ final class MapViewModel: ObservableObject {
         }
     }
     
+    @Published var brushType: BaseTerrainType = .grass
+    @Published var layer: MapLayer = .top
+    
     let scene = MapScene()
     let sqlStore: SQLStore
     let terrainManager: TerrainDataManager
@@ -40,12 +43,18 @@ extension MapViewModel {
         let coord = scene.coord(position: converted)
         print(coord)
         
-        scene.map.topLayer.setTileGroup(scene.map.tileProvider.cobblestone, forColumn: coord.x, row: coord.y)
-        
         Task {
+            let tileGroup = scene.map.tileProvider.tile(for: brushType)
             var block = await terrainManager.block(for: coord)
             var square = block.square(at: coord)
-            square.top = .stone
+            switch layer {
+            case .top:
+                square.top = self.brushType
+                await scene.map.topLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
+            case .bottom:
+                square.bottom = self.brushType
+                await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
+            }
             block.set(square: square, at: coord)
             
             await terrainManager.save(block: block)

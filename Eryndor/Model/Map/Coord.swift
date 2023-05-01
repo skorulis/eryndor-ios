@@ -2,9 +2,11 @@
 
 import Foundation
 
-struct Coord: Identifiable {
+struct Coord: Identifiable, Hashable {
     let x: Int
     let y: Int
     
     var id: String { "\(x)-\(y)" }
+    
+    static var zero: Coord { .init(x: 0, y: 0) }
 }

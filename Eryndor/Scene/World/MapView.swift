@@ -65,29 +65,6 @@ extension MapView: View {
         
     }
     
-    private var content: some View {
-        grid
-            .frame(width: windowSize.width, height: windowSize.height)
-            .onChange(of: windowSize) { newValue in
-                print(windowSize.width)
-                viewModel.windowSize = newValue
-            }
-    }
-    
-    private var grid: some View {
-        VStack(spacing: 0) {
-            ForEach(viewModel.rows) { row in
-                HStack(spacing: 0) {
-                    ForEach(row.squares) { square in
-                        Text(square.id)
-                            .frame(width: MapViewModel.squareSize, height: MapViewModel.squareSize)
-                            .border(Color.black)
-                    }
-                }
-            }
-        }
-        
-    }
 }
 
 // MARK: - Previews

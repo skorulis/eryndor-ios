@@ -7,12 +7,17 @@ final class IOC: IOCService {
     
     override init(purpose: IOCPurpose = .testing) {
         super.init(purpose: purpose)
+        registerServices()
         registerStores()
         registerViewModels()
     }
     
     private func registerViewModels() {
         container.autoregister(MapViewModel.self, initializer: MapViewModel.init)
+    }
+    
+    private func registerServices() {
+        container.autoregister(TerrainDataManager.self, initializer: TerrainDataManager.init)
     }
     
     private func registerStores() {
@@ -26,6 +31,7 @@ final class IOC: IOCService {
                 return SQLStore(inMemory: true)
             }
         }
+        
         
     }
     

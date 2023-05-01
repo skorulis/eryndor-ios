@@ -6,25 +6,16 @@ import SpriteKit
 
 final class MapNode: SKNode {
     
-    private let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
+    let tileProvider = TileProvider()
     let tileSize = CGSize(width: 128, height: 128)
-    let columns = 64
-    let rows = 64
-    lazy var bottomLayer = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: tileSize)
-    
-    // create our grass/water layer
-    lazy var topLayer = SKTileMapNode(tileSet: tileSet, columns: columns, rows: rows, tileSize: tileSize)
-    
-    lazy var waterTiles = tileSet.tileGroups.first { $0.name == "Water" }
-    lazy var grassTiles = tileSet.tileGroups.first { $0.name == "Grass"}
-    lazy var sandTiles = tileSet.tileGroups.first { $0.name == "Sand"}
-    lazy var cobblestone = tileSet.tileGroups.first { $0.name == "Cobblestone" }
+    let columns = TerrainBlock.blockSize
+    let rows = TerrainBlock.blockSize
+    lazy var bottomLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+    lazy var topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
     
     override init() {
         super.init()
-        bottomLayer.fill(with: sandTiles)
-        //bottomLayer.anchorPoint = .zero
-        //topLayer.anchorPoint = .zero
+        //bottomLayer.fill(with: sandTiles)
         addChild(bottomLayer)
         
         // create the noise map
@@ -36,18 +27,7 @@ final class MapNode: SKNode {
         // add the grass/water layer to our main map node
         addChild(topLayer)
         
-        for column in 0 ..< columns {
-            for row in 0 ..< rows {
-                let location = vector2(Int32(row), Int32(column))
-                let terrainHeight = noiseMap.value(at: location)
-
-                if terrainHeight < 0 {
-                    topLayer.setTileGroup(waterTiles, forColumn: column, row: row)
-                } else {
-                    topLayer.setTileGroup(grassTiles, forColumn: column, row: row)
-                }
-            }
-        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -66,9 +46,18 @@ final class MapNode: SKNode {
         return GKNoiseMap(noise, size: size, origin: origin, sampleCount: sampleCount, seamless: true)
     }
     
-    override func touchesBegan(with event: NSEvent) {
-        print(event)
-        let x = event.location(in: bottomLayer)
-        print(x)
+    func apply(block: TerrainBlockRecord) {
+        for i in 0..<block.block.rows.count {
+            let row = block.block.rows[i]
+            for j in 0..<row.squares.count {
+                let square = row.squares[j]
+                let bottom = square.layers[0]
+                bottomLayer.setTileGroup(tileProvider.tile(for: bottom), forColumn: j, row: i)
+                if square.layers.count >= 2 {
+                    let top = square.layers[1]
+                    topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)
+                }
+            }
+        }
     }
 }

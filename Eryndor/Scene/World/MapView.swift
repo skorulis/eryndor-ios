@@ -24,7 +24,7 @@ extension MapView: View {
     var body: some View {
         ZStack {
             skContent
-                .gesture(dragGesture)
+                .gesture(paintGesture)
                 .onTapGesture(perform: viewModel.tap)
             
             controlsOverlay

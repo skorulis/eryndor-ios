@@ -15,7 +15,7 @@ final class MapNode: SKNode {
     let topLayer: SKTileMapNode
     
     override init() {
-        bottomLayer = SKTileMapNode(tileSet: bottomTileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+        bottomLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         
         super.init()
@@ -23,6 +23,7 @@ final class MapNode: SKNode {
 
         // make SpriteKit do the work of placing specific tiles
         topLayer.enableAutomapping = true
+        bottomLayer.enableAutomapping = false
 
         // add the grass/water layer to our main map node
         addChild(topLayer)
@@ -37,7 +38,7 @@ final class MapNode: SKNode {
             let row = block.block.rows[i]
             for j in 0..<row.squares.count {
                 let square = row.squares[j]
-                bottomLayer.setTileGroup(bottomTileProvider.tile(for: square.bottom), forColumn: j, row: i)
+                bottomLayer.setTileGroup(tileProvider.tile(for: square.bottom), forColumn: j, row: i)
                 if let top = square.top {
                     topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)
                 }

@@ -10,12 +10,7 @@ struct InputLoader {
     
     init(rootDir: URL) throws {
         let resourceDir = fileManager.currentDirectoryPath + "/TileManager_TileManager.bundle/Contents/Resources/Resource/InputTiles"
-        let contents = try fileManager.contentsOfDirectory(atPath: resourceDir)
-        for file in contents {
-            print(file)
-        }
         images = BaseTerrain.allCases.map { Self.load(terrain: $0, folder: resourceDir) }
-        print(images)
     }
     
     private static func load(terrain: BaseTerrain, folder: String) -> TerrainImages {
@@ -24,7 +19,6 @@ struct InputLoader {
         SKTileAdjacencyMask.usedAdjacency.forEach { adj in
             let filename = terrain.rawValue + "_" + adj.fileExtension + ".png"
             let fullPath = folder + "/" + filename
-            print(fullPath)
             if fileManager.fileExists(atPath: fullPath) {
                 let image = NSImage(contentsOfFile: fullPath)
                 output.images[adj] = image
@@ -33,4 +27,8 @@ struct InputLoader {
         return output
     }
     
+    func images(for terrain: BaseTerrain) -> TerrainImages {
+        return images.first(where: {$0.base == terrain} )!
+    }
+ 
 }

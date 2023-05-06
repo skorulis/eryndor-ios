@@ -41,7 +41,6 @@ extension MapViewModel {
     func tap(location: CGPoint) {
         let converted = CGPoint(x: location.x, y: scene.size.height - location.y)
         let coord = scene.coord(position: converted)
-        print(coord)
         
         Task {
             let tileGroup = tileProvider.tile(for: brushType)

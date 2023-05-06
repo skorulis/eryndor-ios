@@ -15,7 +15,7 @@ struct InputLoader {
     
     private static func load(terrain: BaseTerrain, folder: String) -> TerrainImages {
         let fileManager = FileManager.default
-        var output = TerrainImages(base: terrain)
+        var output = TerrainImages(terrain: terrain)
         SKTileAdjacencyMask.usedAdjacency.forEach { adj in
             let filename = terrain.rawValue + "_" + adj.fileExtension + ".png"
             let fullPath = folder + "/" + filename
@@ -28,7 +28,7 @@ struct InputLoader {
     }
     
     func images(for terrain: BaseTerrain) -> TerrainImages {
-        return images.first(where: {$0.base == terrain} )!
+        return images.first(where: {$0.terrain == terrain} )!
     }
  
 }

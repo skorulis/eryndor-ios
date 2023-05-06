@@ -3,13 +3,6 @@
 import Foundation
 import SpriteKit
 
-struct TerrainImages {
-    
-    let base: BaseTerrain
-    var images: [SKTileAdjacencyMask: NSImage] = [:]
-    
-}
-
 extension SKTileAdjacencyMask: Hashable { }
 
 extension SKTileAdjacencyMask {
@@ -36,7 +29,7 @@ extension SKTileAdjacencyMask {
         case .adjacencyLeft: return "Grid_Right"
         case .adjacencyRight: return "Grid_Left"
         case .adjacencyUpperRight: return "Grid_DownLeft"
-        case .adjacencyLowerRight: return "Grid_DownRightInterior"
+        case .adjacencyLowerRight: return "Grid_UpLeft"
         case .adjacencyUpperLeft: return "Grid_DownRight"
         case .adjacencyLowerLeft: return "Grid_UpRight"
         default:

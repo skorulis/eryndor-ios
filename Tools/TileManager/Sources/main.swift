@@ -4,4 +4,8 @@ let input = try InputLoader(rootDir: .init(filePath: "~/dev/ios/Eryndor/Tools/Ti
 
 let mixer = TerrainMixer()
 
-mixer.mix(top: input.images(for: .grass), bottom: input.images(for: .sand))
+let output = mixer.mix(bottom: input.images(for: .sand), top: input.images(for: .grass))
+
+let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Eryndor/Resource/Assets.xcassets/Generated"))
+
+try writer.write(merged: output)

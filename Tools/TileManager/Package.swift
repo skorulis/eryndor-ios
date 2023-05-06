@@ -5,9 +5,14 @@ import PackageDescription
 
 let package = Package(
     name: "TileManager",
+    platforms: [
+        .macOS(.v13)
+    ],
     targets: [
         .executableTarget(
             name: "TileManager",
-            path: "Sources"),
+            path: "Sources",
+            resources: [.copy("Resource")]
+        ),
     ]
 )

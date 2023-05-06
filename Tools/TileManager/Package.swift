@@ -8,9 +8,15 @@ let package = Package(
     platforms: [
         .macOS(.v13)
     ],
+    dependencies: [
+        .package(path: "../../Frameworks/Terrain")
+    ],
     targets: [
         .executableTarget(
             name: "TileManager",
+            dependencies: [
+                "Terrain"
+            ],
             path: "Sources",
             resources: [.copy("Resource")]
         ),

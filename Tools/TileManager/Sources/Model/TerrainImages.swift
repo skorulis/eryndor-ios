@@ -2,6 +2,7 @@
 
 import Foundation
 import SpriteKit
+import Terrain
 
 struct TerrainImages {
     

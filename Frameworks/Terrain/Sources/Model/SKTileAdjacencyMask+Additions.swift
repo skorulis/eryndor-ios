@@ -5,7 +5,7 @@ import SpriteKit
 
 extension SKTileAdjacencyMask: Hashable { }
 
-extension SKTileAdjacencyMask {
+public extension SKTileAdjacencyMask {
     
     static var usedAdjacency: [SKTileAdjacencyMask] {
         return [

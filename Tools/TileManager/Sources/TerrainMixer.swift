@@ -3,6 +3,7 @@
 import CoreGraphics
 import Foundation
 import SpriteKit
+import Terrain
 
 final class TerrainMixer {
     

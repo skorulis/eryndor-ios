@@ -39,7 +39,8 @@ final class MapNode: SKNode {
             let row = block.block.rows[i]
             for j in 0..<row.squares.count {
                 let square = row.squares[j]
-                bottomLayer.setTileGroup(tileProvider.tile(for: square.bottom), forColumn: j, row: i)
+                bottomLayer.setTileGroup(bottomTileProvider.tile(for: square.bottom), forColumn: j, row: i)
+                print(bottomTileProvider.tile(for: square.bottom).rules.count)
                 print(square.bottom)
                 if let top = square.top {
                     topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)

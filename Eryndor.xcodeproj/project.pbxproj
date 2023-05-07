@@ -30,7 +30,6 @@
 		FA7D983129FF490F000FFC9A /* TerrainDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983029FF490F000FFC9A /* TerrainDataManagerTests.swift */; };
 		FA7D983529FF4B1A000FFC9A /* CoordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983429FF4B1A000FFC9A /* CoordTests.swift */; };
 		FA7D983729FF56B3000FFC9A /* MapLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983629FF56B3000FFC9A /* MapLayer.swift */; };
-		FA7D983929FF6778000FFC9A /* 16TileSet.sks in Resources */ = {isa = PBXBuildFile; fileRef = FA7D983829FF6778000FFC9A /* 16TileSet.sks */; };
 		FA7D983B29FF6CD2000FFC9A /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983A29FF6CD2000FFC9A /* TileProvider.swift */; };
 		FA7D983D29FF6D2F000FFC9A /* BottomTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */; };
 		FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */; };
@@ -73,7 +72,6 @@
 		FA7D983029FF490F000FFC9A /* TerrainDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainDataManagerTests.swift; sourceTree = "<group>"; };
 		FA7D983429FF4B1A000FFC9A /* CoordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordTests.swift; sourceTree = "<group>"; };
 		FA7D983629FF56B3000FFC9A /* MapLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayer.swift; sourceTree = "<group>"; };
-		FA7D983829FF6778000FFC9A /* 16TileSet.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = 16TileSet.sks; sourceTree = "<group>"; };
 		FA7D983A29FF6CD2000FFC9A /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTileProvider.swift; sourceTree = "<group>"; };
 		FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeView.swift; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				FA62FDB929EBA1E400A02335 /* Assets.xcassets */,
 				FA62FDBA29EBA1E400A02335 /* Preview Content */,
 				FA0C95D629F4B35500388C9D /* MapTileSet.sks */,
-				FA7D983829FF6778000FFC9A /* 16TileSet.sks */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -413,7 +410,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA7D983929FF6778000FFC9A /* 16TileSet.sks in Resources */,
 				FA0C95D729F4B35500388C9D /* MapTileSet.sks in Resources */,
 				FA62FDC429EBA25E00A02335 /* ASKDesignSystem in Resources */,
 				FA62FDBF29EBA1E400A02335 /* Preview Assets.xcassets in Resources */,

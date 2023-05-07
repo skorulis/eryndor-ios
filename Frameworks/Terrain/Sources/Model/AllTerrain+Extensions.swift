@@ -9,4 +9,21 @@ public extension AllTerrain {
         let bundle = Bundle.workaround
         return bundle.image(forResource: filename)!
     }
+    
+    static var tileSet: SKTileSet {
+        let groups = Dictionary(grouping: AllTerrain.allCases, by: {$0}).mapValues {
+            let type = $0[0]
+            let image = type.image
+            let texture = SKTexture(image: image)
+            let def = SKTileDefinition(texture: texture)
+            let group = SKTileGroup(tileDefinition: def)
+            group.name = type.filename
+            return group
+        }
+        let result = SKTileSet(tileGroups: Array(groups.values), tileSetType: .grid)
+        result.defaultTileSize = CGSize(width: 128, height: 128)
+        result.name = "AllTerrain"
+        result.defaultTileGroup = groups.values.first
+        return result
+    }
 }

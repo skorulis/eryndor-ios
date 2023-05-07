@@ -14,9 +14,7 @@ struct BottomTileProvider: TileProvider {
         return newTileSet.tileSet
     }
     
-    init() {
-        
-    }
+    init() { }
     
     func tile(for type: AllTerrain) -> SKTileGroup {
         return newTileSet.group(type)

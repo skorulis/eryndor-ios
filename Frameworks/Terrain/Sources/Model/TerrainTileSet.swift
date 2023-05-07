@@ -9,17 +9,23 @@ public struct TerrainTileSet {
     public let tileSet: SKTileSet
     
     public init() {
-        groups = Dictionary(grouping: AllTerrain.allCases, by: {$0}).mapValues {
-            let image = $0[0].image
-            let texture = SKTexture(image: image)
-            let def = SKTileDefinition(texture: texture)
-            return SKTileGroup(tileDefinition: def)
+        let tiles = SKTileSet(named: "AllTerrain")!
+        self.tileSet = tiles
+        
+        var lookup: [AllTerrain: SKTileGroup] = [:]
+        
+        for group in tiles.tileGroups {
+            let key = AllTerrain.allCases.first(where: {$0.filename == group.name})!
+            lookup[key] = group
         }
-        self.tileSet = SKTileSet(tileGroups: Array(groups.values))
+        self.groups = lookup
     }
     
     public func group(_ type: AllTerrain) -> SKTileGroup {
-        return groups[type]!
+        guard let value = groups[type] else {
+            fatalError("Could not find group for \(type)")
+        }
+        return value
     }
     
 }

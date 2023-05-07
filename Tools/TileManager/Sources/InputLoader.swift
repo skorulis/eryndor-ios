@@ -10,11 +10,10 @@ struct InputLoader {
     private let images: [TerrainImages]
     
     init(rootDir: URL) throws {
-        let resourceDir = fileManager.currentDirectoryPath + "/TileManager_TileManager.bundle/Contents/Resources/Resource/InputTiles"
-        images = BaseTerrain.allCases.map { Self.load(terrain: $0, folder: resourceDir) }
+        images = BaseTerrain.allCases.map { Self.load(terrain: $0) }
     }
     
-    private static func load(terrain: BaseTerrain, folder: String) -> TerrainImages {
+    private static func load(terrain: BaseTerrain) -> TerrainImages {
         var output = TerrainImages(terrain: terrain)
         SKTileAdjacencyMask.usedAdjacency.forEach { adj in
             if let image = ImageAccess.image(terrain: terrain, adjacency: adj) {

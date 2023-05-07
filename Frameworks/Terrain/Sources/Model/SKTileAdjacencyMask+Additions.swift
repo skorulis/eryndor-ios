@@ -36,4 +36,24 @@ public extension SKTileAdjacencyMask {
             fatalError("Unexpected adjacency \(self)")
         }
     }
+    
+    var name: String {
+        return fileExtension.replacingOccurrences(of: "_", with: "")
+    }
+    
+    var idOffset: Int {
+        switch self {
+        case .adjacencyAll: return 0
+        case .adjacencyDown: return 1
+        case .adjacencyUp: return 2
+        case .adjacencyLeft: return 3
+        case .adjacencyRight: return 4
+        case .adjacencyUpperRight: return 5
+        case .adjacencyLowerRight: return 6
+        case .adjacencyUpperLeft: return 7
+        case .adjacencyLowerLeft: return 8
+        default:
+            fatalError("Unexpected adjacency \(self)")
+        }
+    }
 }

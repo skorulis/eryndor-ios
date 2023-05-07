@@ -6,6 +6,12 @@ let mixer = TerrainMixer()
 
 let output = mixer.mix(bottom: input.images(for: .sand), top: input.images(for: .grass))
 
+let defs = output.definitions(baseID: 0)
+
+let codeWriter = CodeWriter(filename: URL(filePath: "/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Model/AllTerrain.swift"))
+
+try codeWriter.write(defs: defs)
+
 let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Eryndor/Resource/Assets.xcassets/Generated"))
 
 try writer.write(merged: output)

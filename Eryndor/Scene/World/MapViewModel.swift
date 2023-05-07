@@ -64,7 +64,7 @@ extension MapViewModel {
     private var tileProvider: TileProvider {
         switch layer {
         case .bottom:
-            return scene.map.tileProvider
+            return scene.map.bottomTileProvider
         case .top:
             return scene.map.tileProvider
         }

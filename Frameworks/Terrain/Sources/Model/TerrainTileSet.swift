@@ -9,7 +9,7 @@ public struct TerrainTileSet {
     public let tileSet: SKTileSet
     
     public init() {
-        let tiles = SKTileSet(named: "AllTerrain")!
+        let tiles = AllTerrain.generatedTileSet //SKTileSet(named: "AllTerrain")!
         self.tileSet = tiles
         
         var lookup: [AllTerrain: SKTileGroup] = [:]

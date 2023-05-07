@@ -10,26 +10,36 @@ public enum AllTerrain: Int, CaseIterable, Codable {
 	case GrassGridUpLeft = 7
 	case GrassGridDownRight = 8
 	case GrassGridUpRight = 9
-    
-	case SandGridCenter = 10
-	case SandGridUp = 11
-	case SandGridDown = 12
-	case SandGridRight = 13
-	case SandGridLeft = 14
-	case SandGridDownLeft = 15
-	case SandGridUpLeft = 16
-	case SandGridDownRight = 17
-	case SandGridUpRight = 18
-    
-	case Sand_GrassGridCenter = 19
-	case Sand_GrassGridUp = 20
-	case Sand_GrassGridDown = 21
-	case Sand_GrassGridRight = 22
-	case Sand_GrassGridLeft = 23
-	case Sand_GrassGridDownLeft = 24
-	case Sand_GrassGridUpLeft = 25
-	case Sand_GrassGridDownRight = 26
-	case Sand_GrassGridUpRight = 27
+	case GrassGridUpRightInterior = 10
+	case GrassGridDownRightInterior = 11
+	case GrassGridDownLeftInterior = 12
+	case GrassGridUpLeftInterior = 13
+	case SandGridCenter = 14
+	case SandGridUp = 15
+	case SandGridDown = 16
+	case SandGridRight = 17
+	case SandGridLeft = 18
+	case SandGridDownLeft = 19
+	case SandGridUpLeft = 20
+	case SandGridDownRight = 21
+	case SandGridUpRight = 22
+	case SandGridUpRightInterior = 23
+	case SandGridDownRightInterior = 24
+	case SandGridDownLeftInterior = 25
+	case SandGridUpLeftInterior = 26
+	case Sand_GrassGridCenter = 27
+	case Sand_GrassGridUp = 28
+	case Sand_GrassGridDown = 29
+	case Sand_GrassGridRight = 30
+	case Sand_GrassGridLeft = 31
+	case Sand_GrassGridDownLeft = 32
+	case Sand_GrassGridUpLeft = 33
+	case Sand_GrassGridDownRight = 34
+	case Sand_GrassGridUpRight = 35
+	case Sand_GrassGridUpRightInterior = 36
+	case Sand_GrassGridDownRightInterior = 37
+	case Sand_GrassGridDownLeftInterior = 38
+	case Sand_GrassGridUpLeftInterior = 39
 
 public var filename: String {
 	switch self {
@@ -42,6 +52,10 @@ public var filename: String {
 		case .GrassGridUpLeft: return "Grass_Grid_UpLeft"
 		case .GrassGridDownRight: return "Grass_Grid_DownRight"
 		case .GrassGridUpRight: return "Grass_Grid_UpRight"
+		case .GrassGridUpRightInterior: return "Grass_Grid_UpRightInterior"
+		case .GrassGridDownRightInterior: return "Grass_Grid_DownRightInterior"
+		case .GrassGridDownLeftInterior: return "Grass_Grid_DownLeftInterior"
+		case .GrassGridUpLeftInterior: return "Grass_Grid_UpLeftInterior"
 		case .SandGridCenter: return "Sand_Grid_Center"
 		case .SandGridUp: return "Sand_Grid_Up"
 		case .SandGridDown: return "Sand_Grid_Down"
@@ -51,6 +65,10 @@ public var filename: String {
 		case .SandGridUpLeft: return "Sand_Grid_UpLeft"
 		case .SandGridDownRight: return "Sand_Grid_DownRight"
 		case .SandGridUpRight: return "Sand_Grid_UpRight"
+		case .SandGridUpRightInterior: return "Sand_Grid_UpRightInterior"
+		case .SandGridDownRightInterior: return "Sand_Grid_DownRightInterior"
+		case .SandGridDownLeftInterior: return "Sand_Grid_DownLeftInterior"
+		case .SandGridUpLeftInterior: return "Sand_Grid_UpLeftInterior"
 		case .Sand_GrassGridCenter: return "Sand_Grass_Grid_Center"
 		case .Sand_GrassGridUp: return "Sand_Grass_Grid_Up"
 		case .Sand_GrassGridDown: return "Sand_Grass_Grid_Down"
@@ -60,6 +78,10 @@ public var filename: String {
 		case .Sand_GrassGridUpLeft: return "Sand_Grass_Grid_UpLeft"
 		case .Sand_GrassGridDownRight: return "Sand_Grass_Grid_DownRight"
 		case .Sand_GrassGridUpRight: return "Sand_Grass_Grid_UpRight"
+		case .Sand_GrassGridUpRightInterior: return "Sand_Grass_Grid_UpRightInterior"
+		case .Sand_GrassGridDownRightInterior: return "Sand_Grass_Grid_DownRightInterior"
+		case .Sand_GrassGridDownLeftInterior: return "Sand_Grass_Grid_DownLeftInterior"
+		case .Sand_GrassGridUpLeftInterior: return "Sand_Grass_Grid_UpLeftInterior"
 	}
 }
 

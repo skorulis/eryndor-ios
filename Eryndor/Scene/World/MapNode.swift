@@ -16,7 +16,7 @@ final class MapNode: SKNode {
     let topLayer: SKTileMapNode
     
     override init() {
-        bottomLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+        bottomLayer = SKTileMapNode(tileSet: bottomTileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         
         super.init()
@@ -40,8 +40,6 @@ final class MapNode: SKNode {
             for j in 0..<row.squares.count {
                 let square = row.squares[j]
                 bottomLayer.setTileGroup(bottomTileProvider.tile(for: square.bottom), forColumn: j, row: i)
-                print(bottomTileProvider.tile(for: square.bottom).rules.count)
-                print(square.bottom)
                 if let top = square.top {
                     topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)
                 }

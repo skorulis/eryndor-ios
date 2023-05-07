@@ -18,6 +18,10 @@ public extension SKTileAdjacencyMask {
             .adjacencyLowerRight,
             .adjacencyUpperLeft,
             .adjacencyLowerLeft,
+            .adjacencyUpperRightEdge,
+            .adjacencyLowerRightEdge,
+            .adjacencyLowerLeftEdge,
+            .adjacencyUpperLeftEdge,
         ]
     }
     
@@ -32,6 +36,10 @@ public extension SKTileAdjacencyMask {
         case .adjacencyLowerRight: return "Grid_UpLeft"
         case .adjacencyUpperLeft: return "Grid_DownRight"
         case .adjacencyLowerLeft: return "Grid_UpRight"
+        case .adjacencyUpperRightEdge: return "Grid_UpRightInterior"
+        case .adjacencyLowerRightEdge: return "Grid_DownRightInterior"
+        case .adjacencyLowerLeftEdge: return "Grid_DownLeftInterior"
+        case .adjacencyUpperLeftEdge: return "Grid_UpLeftInterior"
         default:
             fatalError("Unexpected adjacency \(self)")
         }
@@ -52,6 +60,10 @@ public extension SKTileAdjacencyMask {
         case .adjacencyLowerRight: return 6
         case .adjacencyUpperLeft: return 7
         case .adjacencyLowerLeft: return 8
+        case .adjacencyUpperRightEdge: return 9
+        case .adjacencyLowerRightEdge: return 10
+        case .adjacencyLowerLeftEdge: return 11
+        case .adjacencyUpperLeftEdge: return 12
         default:
             fatalError("Unexpected adjacency \(self)")
         }

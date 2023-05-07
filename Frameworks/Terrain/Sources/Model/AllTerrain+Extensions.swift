@@ -10,7 +10,7 @@ public extension AllTerrain {
         return bundle.image(forResource: filename)!
     }
     
-    static var tileSet: SKTileSet {
+    static var generatedTileSet: SKTileSet {
         let groups = Dictionary(grouping: AllTerrain.allCases, by: {$0}).mapValues {
             let type = $0[0]
             let image = type.image

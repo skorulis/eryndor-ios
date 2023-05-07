@@ -9,7 +9,6 @@ struct TopTileProvider: TileProvider {
     static let tileSize: Int = 128
     
     let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
-    let newTileSet = TerrainTileSet()
     
     let waterTiles: SKTileGroup
     let grassTiles: SKTileGroup
@@ -24,7 +23,7 @@ struct TopTileProvider: TileProvider {
     }
     
     func tile(for type: AllTerrain) -> SKTileGroup {
-        return newTileSet.group(type)
+        return tile(for: .grass)
     }
     
     func tile(for type: BaseTerrain) -> SKTileGroup {

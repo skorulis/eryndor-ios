@@ -12,6 +12,6 @@ let codeWriter = CodeWriter(filename: URL(filePath: "/Users/alex/dev/ios/Eryndor
 
 try codeWriter.write(defs: defs)
 
-let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Eryndor/Resource/Assets.xcassets/Generated"))
+let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Resource/Media.xcassets/Generated"))
 
 try writer.write(merged: output)

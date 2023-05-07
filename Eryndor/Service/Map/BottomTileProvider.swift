@@ -2,31 +2,28 @@
 
 import Foundation
 import SpriteKit
+import Terrain
 
 struct BottomTileProvider: TileProvider {
     
     static let tileSize: Int = 128
     
-    let tileSet = SKTileSet(named: "BaseLayerTileSet")!
+    let newTileSet = TerrainTileSet()
     
-    let waterTiles: SKTileGroup
-    let grassTiles: SKTileGroup
-    let sandTiles: SKTileGroup
-    let cobblestone: SKTileGroup
+    var tileSet: SKTileSet {
+        return newTileSet.tileSet
+    }
     
     init() {
-        waterTiles = tileSet.group(named: "Water")
-        grassTiles = tileSet.group(named: "Grass")
-        sandTiles = tileSet.group(named: "Sand")
-        cobblestone = tileSet.group(named: "Cobblestone")
+        
     }
     
     func tile(for type: BaseTerrainType) -> SKTileGroup {
         switch type {
-        case .grass: return grassTiles
-        case .sand: return sandTiles
-        case .water: return waterTiles
-        case .stone: return cobblestone
+        case .grass: return newTileSet.group(.GrassGridCenter)
+        case .sand: return newTileSet.group(.SandGridCenter)
+        case .water: return newTileSet.group(.GrassGridLeft)
+        case .stone: return newTileSet.group(.GrassGridRight)
         }
     }
 }

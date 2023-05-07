@@ -36,6 +36,7 @@
 		FA7D983D29FF6D2F000FFC9A /* BottomTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */; };
 		FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */; };
 		FA99707529EE675B007C3211 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99707429EE675B007C3211 /* Coord.swift */; };
+		FADC815D2A07482000740947 /* Terrain in Frameworks */ = {isa = PBXBuildFile; productRef = FADC815C2A07482000740947 /* Terrain */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +80,7 @@
 		FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTileProvider.swift; sourceTree = "<group>"; };
 		FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeView.swift; sourceTree = "<group>"; };
 		FA99707429EE675B007C3211 /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
+		FADC815B2A07443300740947 /* Terrain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Terrain; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FADC815D2A07482000740947 /* Terrain in Frameworks */,
 				FA62FDD829EBADC000A02335 /* ASKDesignSystem in Frameworks */,
 				FA62FDCC29EBAC1400A02335 /* GRDB in Frameworks */,
 				FA62FDD629EBADC000A02335 /* ASKCore in Frameworks */,
@@ -192,6 +195,7 @@
 		FA62FDC029EBA25E00A02335 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FADC815B2A07443300740947 /* Terrain */,
 				FA241C6A29F6740E00865FDE /* ASKCore */,
 				FA62FDC229EBA25E00A02335 /* ASKDesignSystem */,
 			);
@@ -342,6 +346,7 @@
 				FA62FDCB29EBAC1400A02335 /* GRDB */,
 				FA62FDD529EBADC000A02335 /* ASKCore */,
 				FA62FDD729EBADC000A02335 /* ASKDesignSystem */,
+				FADC815C2A07482000740947 /* Terrain */,
 			);
 			productName = Eryndor;
 			productReference = FA62FD9F29EBA1B600A02335 /* Eryndor.app */;
@@ -734,6 +739,10 @@
 		FA62FDD729EBADC000A02335 /* ASKDesignSystem */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ASKDesignSystem;
+		};
+		FADC815C2A07482000740947 /* Terrain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Terrain;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

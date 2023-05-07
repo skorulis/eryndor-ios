@@ -3,6 +3,14 @@
 public enum AllTerrain: Int, CaseIterable {
 {% for terrain in files[0].document.data %}
 	case {{terrain.name}} = {{terrain.id}}
-{% endfor %}	
+{% endfor %}
+
+public var filename: String {
+	switch self {
+	{% for terrain in files[0].document.data %}
+		case .{{terrain.name}}: return "{{terrain.filename}}"
+	{% endfor %}		
+	}
+}
 
 }

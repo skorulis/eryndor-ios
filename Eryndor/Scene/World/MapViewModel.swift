@@ -1,6 +1,7 @@
 //Created by Alexander Skorulis on 16/4/2023.
 
 import Foundation
+import Terrain
 
 final class MapViewModel: ObservableObject {
     
@@ -10,7 +11,7 @@ final class MapViewModel: ObservableObject {
         }
     }
     
-    @Published var brushType: BaseTerrainType = .grass
+    @Published var brushType: AllTerrain = .GrassGridUp
     @Published var layer: MapLayer = .top
     
     let scene = MapScene()

@@ -2,10 +2,12 @@
 
 import Foundation
 import SpriteKit
+import Terrain
 
 protocol TileProvider {
     static var tileSize: Int { get }
     
     var tileSet: SKTileSet { get }
-    func tile(for type: BaseTerrainType) -> SKTileGroup
+    
+    func tile(for: AllTerrain) -> SKTileGroup
 }

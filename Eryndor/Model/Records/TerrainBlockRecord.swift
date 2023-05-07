@@ -2,6 +2,7 @@
 
 import Foundation
 import GRDB
+import Terrain
 
 struct TerrainBlockRecord: Codable, Identifiable {
 
@@ -14,7 +15,7 @@ struct TerrainBlockRecord: Codable, Identifiable {
     var id: String { return coord.id }
     var coord: Coord { Coord(x: x, y: y) }
     
-    init(coord: Coord, bottomTerrain: BaseTerrainType) {
+    init(coord: Coord, bottomTerrain: AllTerrain) {
         self.x = coord.x
         self.y = coord.y
         self.block = TerrainBlock(bottomTerrain: bottomTerrain)
@@ -66,7 +67,7 @@ struct TerrainBlock: Codable {
     
     var rows: [MapRow]
     
-    init(bottomTerrain: BaseTerrainType) {
+    init(bottomTerrain: AllTerrain) {
         let squares = (0..<Self.blockSize).map { _ in
             return MapSquare(bottom: bottomTerrain, top: nil)
         }
@@ -84,6 +85,6 @@ struct MapRow: Codable {
 
 struct MapSquare: Codable {
     
-    var bottom: BaseTerrainType
-    var top: BaseTerrainType?
+    var bottom: AllTerrain
+    var top: AllTerrain?
 }

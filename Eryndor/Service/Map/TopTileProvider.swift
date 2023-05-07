@@ -2,12 +2,14 @@
 
 import Foundation
 import SpriteKit
+import Terrain
 
 struct TopTileProvider: TileProvider {
     
     static let tileSize: Int = 128
     
     let tileSet = SKTileSet(named: "Sample Grid Tile Set")!
+    let newTileSet = TerrainTileSet()
     
     let waterTiles: SKTileGroup
     let grassTiles: SKTileGroup
@@ -21,12 +23,14 @@ struct TopTileProvider: TileProvider {
         cobblestone = tileSet.group(named: "Cobblestone")
     }
     
-    func tile(for type: BaseTerrainType) -> SKTileGroup {
+    func tile(for type: AllTerrain) -> SKTileGroup {
+        return newTileSet.group(type)
+    }
+    
+    func tile(for type: BaseTerrain) -> SKTileGroup {
         switch type {
         case .grass: return grassTiles
         case .sand: return sandTiles
-        case .water: return waterTiles
-        case .stone: return cobblestone
         }
     }
 }

@@ -1,6 +1,6 @@
 // Generated code. DO NOT EDIT
 
-public enum AllTerrain: Int, CaseIterable {
+public enum AllTerrain: Int, CaseIterable, Codable {
 	case GrassGridCenter = 1
 	case GrassGridUp = 2
 	case GrassGridDown = 3

@@ -2,6 +2,7 @@
 
 import Foundation
 import GRDB
+import Terrain
 
 actor TerrainDataManager: ObservableObject {
     
@@ -30,7 +31,7 @@ extension TerrainDataManager {
         }
         
         return try! await sqlStore.dbQueue.write { db in
-            var created = TerrainBlockRecord(coord: coord, bottomTerrain: .grass)
+            var created = TerrainBlockRecord(coord: coord, bottomTerrain: .GrassGridCenter)
             try created.insert(db)
             return created
         }

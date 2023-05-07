@@ -3,6 +3,7 @@
 import Foundation
 import SpriteKit
 import SwiftUI
+import Terrain
 
 // MARK: - Memory footprint
 
@@ -90,8 +91,8 @@ extension MapView: View {
     
     private var terrainPicker: some View {
         Picker("", selection: $viewModel.brushType) {
-            ForEach(BaseTerrainType.allCases) { type in
-                Text(type.name)
+            ForEach(AllTerrain.allCases, id:\.filename) { type in
+                Text(type.filename)
                     .tag(type)
             }
         }

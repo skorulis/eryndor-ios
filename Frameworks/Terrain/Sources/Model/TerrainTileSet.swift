@@ -10,7 +10,8 @@ public struct TerrainTileSet {
     
     public init() {
         groups = Dictionary(grouping: AllTerrain.allCases, by: {$0}).mapValues {
-            let texture = SKTexture(imageNamed: $0[0].filename)
+            let image = $0[0].image
+            let texture = SKTexture(image: image)
             let def = SKTileDefinition(texture: texture)
             return SKTileGroup(tileDefinition: def)
         }

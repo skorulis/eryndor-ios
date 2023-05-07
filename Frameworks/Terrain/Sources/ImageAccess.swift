@@ -7,9 +7,7 @@ public final class ImageAccess {
     
     public static func image(terrain: BaseTerrain, adjacency: SKTileAdjacencyMask) -> NSImage? {
         let bundle = Bundle.workaround
-        
         let filename = terrain.rawValue + "_" + adjacency.fileExtension
-        let imageY = NSImage(named: NSImage.Name(filename))
         return bundle.image(forResource: filename)
     }
     

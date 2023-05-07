@@ -3,6 +3,7 @@
 import Foundation
 import GameplayKit
 import SpriteKit
+import Terrain
 
 final class MapNode: SKNode {
     
@@ -39,6 +40,7 @@ final class MapNode: SKNode {
             for j in 0..<row.squares.count {
                 let square = row.squares[j]
                 bottomLayer.setTileGroup(tileProvider.tile(for: square.bottom), forColumn: j, row: i)
+                print(square.bottom)
                 if let top = square.top {
                     topLayer.setTileGroup(tileProvider.tile(for: top), forColumn: j, row: i)
                 }

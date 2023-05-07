@@ -8,4 +8,12 @@ struct FullTerrainDefinition: Codable {
     let id: Int
     let filename: String
     
+    static func generate(containers: [TerrainContainer]) -> [FullTerrainDefinition] {
+        return containers.reduce([]) { partialResult, container in
+            let nextID = partialResult.map { $0.id }.max() ?? 0
+            return partialResult + container.definitions(baseID: nextID + 1)
+        }
+    }
+    
 }
+

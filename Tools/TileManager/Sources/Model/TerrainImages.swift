@@ -4,23 +4,33 @@ import Foundation
 import SpriteKit
 import Terrain
 
-struct TerrainImages {
+protocol TerrainContainer {
+    var images: [SKTileAdjacencyMask: NSImage] { get }
+    var baseName: String { get }
+}
+
+struct TerrainImages: TerrainContainer {
     
     let terrain: BaseTerrain
     var images: [SKTileAdjacencyMask: NSImage] = [:]
     
+    var baseName: String { terrain.rawValue }
 }
 
-struct MergedTerrainImages {
+struct MergedTerrainImages: TerrainContainer {
     let terrain: MergedTerrain
     var images: [SKTileAdjacencyMask: NSImage] = [:]
     
+    var baseName: String { terrain.name }
+}
+
+extension TerrainContainer {
     func definitions(baseID: Int) -> [FullTerrainDefinition] {
         return images.map { key, _ in
             return FullTerrainDefinition(
-                name: "\(terrain.name)\(key.name)",
+                name: "\(baseName)\(key.name)",
                 id: baseID + key.idOffset,
-                filename: "\(terrain.name)_\(key.fileExtension)"
+                filename: "\(baseName)_\(key.fileExtension)"
             )
         }
     }

@@ -7,7 +7,7 @@ import Terrain
 struct InputLoader {
     
     private let fileManager = FileManager.default
-    private let images: [TerrainImages]
+    let images: [TerrainImages]
     
     init(rootDir: URL) throws {
         images = BaseTerrain.allCases.map { Self.load(terrain: $0) }

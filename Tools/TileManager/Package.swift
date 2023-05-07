@@ -17,8 +17,7 @@ let package = Package(
             dependencies: [
                 "Terrain"
             ],
-            path: "Sources",
-            resources: [.copy("Resource")]
+            path: "Sources"
         ),
     ]
 )

@@ -5,6 +5,9 @@ import PackageDescription
 
 let package = Package(
     name: "Terrain",
+    platforms: [
+        .macOS(.v13)
+    ],
     products: [
         .library(
             name: "Terrain",
@@ -13,7 +16,8 @@ let package = Package(
     targets: [
         .target(
             name: "Terrain",
-            path: "Sources"
+            path: "Sources",
+            resources: [.process("Resource")]
         ),
     ]
 )

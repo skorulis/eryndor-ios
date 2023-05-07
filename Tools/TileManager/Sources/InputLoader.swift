@@ -15,13 +15,9 @@ struct InputLoader {
     }
     
     private static func load(terrain: BaseTerrain, folder: String) -> TerrainImages {
-        let fileManager = FileManager.default
         var output = TerrainImages(terrain: terrain)
         SKTileAdjacencyMask.usedAdjacency.forEach { adj in
-            let filename = terrain.rawValue + "_" + adj.fileExtension + ".png"
-            let fullPath = folder + "/" + filename
-            if fileManager.fileExists(atPath: fullPath) {
-                let image = NSImage(contentsOfFile: fullPath)
+            if let image = ImageAccess.image(terrain: terrain, adjacency: adj) {
                 output.images[adj] = image
             }
         }

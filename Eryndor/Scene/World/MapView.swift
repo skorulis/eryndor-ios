@@ -92,7 +92,12 @@ extension MapView: View {
     private var terrainPicker: some View {
         Picker("", selection: $viewModel.brushType) {
             ForEach(AllTerrain.allCases, id:\.filename) { type in
-                Text(type.filename)
+                HStack {
+                    Image(nsImage: type.image)
+                        .resizable()
+                        .frame(width: 32, height: 32)
+                    Text(type.filename)
+                }
                     .tag(type)
             }
         }

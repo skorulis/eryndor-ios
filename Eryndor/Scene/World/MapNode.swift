@@ -10,8 +10,8 @@ final class MapNode: SKNode {
     let tileProvider = TopTileProvider()
     let bottomTileProvider = BottomTileProvider()
     let tileSize = CGSize(width: TopTileProvider.tileSize, height: TopTileProvider.tileSize)
-    let columns = TerrainBlock.blockSize
-    let rows = TerrainBlock.blockSize
+    let columns = TerrainBlockRecord.blockSize
+    let rows = TerrainBlockRecord.blockSize
     let bottomLayer: SKTileMapNode
     let topLayer: SKTileMapNode
     

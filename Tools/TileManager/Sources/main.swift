@@ -1,12 +1,14 @@
 import Foundation
 
 let input = try InputLoader(rootDir: .init(filePath: "~/dev/ios/Eryndor/Tools/TileManager"))
+print("Loaded base images")
 
 let mixer = TerrainMixer()
 
-let output = mixer.mix(bottom: input.images(for: .sand), top: input.images(for: .grass))
+let grassMix = mixer.createMissing(initial: input.images(for: .grass))
+let sandMix = mixer.createMissing(initial: input.images(for: .sand))
 
-let defs = FullTerrainDefinition.generate(containers: input.images + [output])
+let defs = FullTerrainDefinition.generate(containers: input.images + [grassMix, sandMix])
 
 let codeWriter = CodeWriter(filename: URL(filePath: "/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Model/AllTerrain.swift"))
 
@@ -14,4 +16,5 @@ try codeWriter.write(defs: defs)
 
 let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Resource/Media.xcassets/Generated"))
 
-try writer.write(merged: output)
+try writer.write(merged: grassMix)
+try writer.write(merged: sandMix)

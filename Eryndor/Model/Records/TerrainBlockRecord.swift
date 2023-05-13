@@ -6,6 +6,8 @@ import Terrain
 
 struct TerrainBlockRecord: Codable, Identifiable {
 
+    static let blockSize: Int = 128
+    
     private var rowId: Int64?
     // Top left coordinates
     let x: Int
@@ -18,7 +20,7 @@ struct TerrainBlockRecord: Codable, Identifiable {
     init(coord: Coord, bottomTerrain: AllTerrain) {
         self.x = coord.x
         self.y = coord.y
-        self.block = TerrainBlock(bottomTerrain: bottomTerrain)
+        self.block = TerrainBlockRecord.new(bottomTerrain: bottomTerrain)
     }
     
     func square(at: Coord) -> MapSquare {
@@ -29,7 +31,7 @@ struct TerrainBlockRecord: Codable, Identifiable {
     private func local(coord: Coord) -> Coord {
         let i = coord.x - x
         let j = coord.y - y
-        guard i < TerrainBlock.blockSize, j < TerrainBlock.blockSize, i >= 0, j >= 0 else {
+        guard i < TerrainBlockRecord.blockSize, j < TerrainBlockRecord.blockSize, i >= 0, j >= 0 else {
             fatalError("\(coord) does not live within block at \(self.coord)")
         }
         return Coord(x: i, y: j)
@@ -38,6 +40,16 @@ struct TerrainBlockRecord: Codable, Identifiable {
     mutating func set(square: MapSquare, at: Coord) {
         let l = local(coord: at)
         block.rows[l.y].squares[l.x] = square
+    }
+    
+    static func new(bottomTerrain: AllTerrain) -> TerrainBlock {
+        let squares = (0..<TerrainBlockRecord.blockSize).map { _ in
+            return MapSquare(bottom: bottomTerrain, top: nil)
+        }
+        let rows = (0..<TerrainBlockRecord.blockSize).map { _ in
+            return MapRow(squares: squares)
+        }
+        return TerrainBlock(rows: rows)
     }
     
 }
@@ -63,19 +75,7 @@ extension TerrainBlockRecord: FetchableRecord {
 
 struct TerrainBlock: Codable {
     
-    static let blockSize: Int = 128
-    
     var rows: [MapRow]
-    
-    init(bottomTerrain: AllTerrain) {
-        let squares = (0..<Self.blockSize).map { _ in
-            return MapSquare(bottom: bottomTerrain, top: nil)
-        }
-        rows = (0..<Self.blockSize).map { _ in
-            return MapRow(squares: squares)
-        }
-    }
-    
     
 }
 

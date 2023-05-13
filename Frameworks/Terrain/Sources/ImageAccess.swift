@@ -11,6 +11,12 @@ public final class ImageAccess {
         return bundle.image(forResource: filename)
     }
     
+    public static func image(terrain: BaseTerrain, adjacency: Adjacency) -> NSImage? {
+        let bundle = Bundle.workaround
+        let filename = terrain.rawValue + adjacency.fileExtension
+        return bundle.image(forResource: filename)
+    }
+    
 }
 
 private class BundleFinder {}

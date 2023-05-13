@@ -12,7 +12,7 @@ final class MapViewModel: ObservableObject {
     }
     
     @Published var brushType: AllTerrain = .GrassGridUp
-    @Published var layer: MapLayer = .top
+    @Published var layer: MapLayer = .bottom
     
     let scene = MapScene()
     let sqlStore: SQLStore
@@ -44,6 +44,7 @@ extension MapViewModel {
         let coord = scene.coord(position: converted)
         
         Task {
+            var chunk = await terrainManager.chunk(coord: coord, radius: 2)
             let tileGroup = tileProvider.tile(for: brushType)
             var block = await terrainManager.block(for: coord)
             var square = block.square(at: coord)
@@ -55,9 +56,8 @@ extension MapViewModel {
                 square.bottom = self.brushType
                 await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             }
-            block.set(square: square, at: coord)
-            
-            await terrainManager.save(block: block)
+            chunk.set(square: square, coord: coord)
+            await terrainManager.update(chunk: chunk)
         }
     }
     

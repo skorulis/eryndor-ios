@@ -8,13 +8,13 @@ struct OutputWriter {
     
     let baseDir: URL
     
-    func write(merged: MergedTerrainImages) throws {
+    func write(merged: TerrainImages) throws {
         let fileManager = FileManager.default
         for (key, value) in merged.images {
-            let folder = baseDir.appending(path: "\(merged.terrain.name)_\(key.fileExtension).imageset")
+            let folder = baseDir.appending(path: "\(merged.terrain.rawValue)_\(key.fileExtension).imageset")
             try fileManager.createDirectory(at: folder, withIntermediateDirectories: true)
             
-            let filename = merged.terrain.name + "_" + key.fileExtension + ".png"
+            let filename = merged.terrain.rawValue + "_" + key.fileExtension + ".png"
             let fullPath = folder.appending(path: filename)
             let contentsPath = folder.appending(path: "Contents.json")
             let imageRep = NSBitmapImageRep(data: value.tiffRepresentation!)!

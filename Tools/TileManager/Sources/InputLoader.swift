@@ -15,7 +15,7 @@ struct InputLoader {
     
     private static func load(terrain: BaseTerrain) -> TerrainImages {
         var output = TerrainImages(terrain: terrain)
-        SKTileAdjacencyMask.usedAdjacency.forEach { adj in
+        Adjacency.inputAdjacency.forEach { adj in
             if let image = ImageAccess.image(terrain: terrain, adjacency: adj) {
                 output.images[adj] = image
             }

@@ -32,6 +32,7 @@
 		FA7D983729FF56B3000FFC9A /* MapLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983629FF56B3000FFC9A /* MapLayer.swift */; };
 		FA7D983B29FF6CD2000FFC9A /* TileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983A29FF6CD2000FFC9A /* TileProvider.swift */; };
 		FA7D983D29FF6D2F000FFC9A /* BottomTileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */; };
+		FA8F38E72A0B7F1300CFE9C6 /* TerrainChunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8F38E62A0B7F1300CFE9C6 /* TerrainChunk.swift */; };
 		FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */; };
 		FA99707529EE675B007C3211 /* Coord.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA99707429EE675B007C3211 /* Coord.swift */; };
 		FADC815D2A07482000740947 /* Terrain in Frameworks */ = {isa = PBXBuildFile; productRef = FADC815C2A07482000740947 /* Terrain */; };
@@ -74,6 +75,7 @@
 		FA7D983629FF56B3000FFC9A /* MapLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapLayer.swift; sourceTree = "<group>"; };
 		FA7D983A29FF6CD2000FFC9A /* TileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TileProvider.swift; sourceTree = "<group>"; };
 		FA7D983C29FF6D2F000FFC9A /* BottomTileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomTileProvider.swift; sourceTree = "<group>"; };
+		FA8F38E62A0B7F1300CFE9C6 /* TerrainChunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerrainChunk.swift; sourceTree = "<group>"; };
 		FA99706D29ECA3F5007C3211 /* WindowSizeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindowSizeView.swift; sourceTree = "<group>"; };
 		FA99707429EE675B007C3211 /* Coord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coord.swift; sourceTree = "<group>"; };
 		FADC815B2A07443300740947 /* Terrain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Terrain; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				FA99707429EE675B007C3211 /* Coord.swift */,
 				FA7D983629FF56B3000FFC9A /* MapLayer.swift */,
+				FA8F38E62A0B7F1300CFE9C6 /* TerrainChunk.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				FA99706E29ECA3F5007C3211 /* WindowSizeView.swift in Sources */,
 				FA7D983D29FF6D2F000FFC9A /* BottomTileProvider.swift in Sources */,
 				FA62FDBC29EBA1E400A02335 /* EryndorApp.swift in Sources */,
+				FA8F38E72A0B7F1300CFE9C6 /* TerrainChunk.swift in Sources */,
 				FA62FDC929EBA28200A02335 /* IOC.swift in Sources */,
 				FA7D981E29FF3273000FFC9A /* TerrainDataManager.swift in Sources */,
 			);

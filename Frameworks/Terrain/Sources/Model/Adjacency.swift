@@ -71,9 +71,26 @@ public struct Adjacency: OptionSet, Hashable {
     }
     
     public static var allOptions: [Adjacency] {
-        return (0..<16).map { value in
-            return Adjacency(rawValue: value)
+        return (0..<256).compactMap { value in
+            let adj = Adjacency(rawValue: value)
+            return adj.isValid ? adj : nil
         }
+    }
+    
+    public var isValid: Bool {
+        if contains(.cornerTopLeft) && (contains(.top) || contains(.left)) {
+            return false
+        }
+        if contains(.cornerTopRight) && (contains(.top) || contains(.right)) {
+            return false
+        }
+        if contains(.cornerBottomLeft) && (contains(.bottom) || contains(.left)) {
+            return false
+        }
+        if contains(.cornerBottomRight) && (contains(.bottom) || contains(.right)) {
+            return false
+        }
+        return true
     }
     
     public var idOffset: Int {

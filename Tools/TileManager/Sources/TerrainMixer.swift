@@ -25,25 +25,63 @@ final class TerrainMixer {
                 continue
             }
             let pieces = components(adjacency: opt)
-            let image1 = initial.images[pieces[0]]!
-            let image2 = initial.images[pieces[1]]!
-            images.images[opt] = mixImage(bottom: image1, top: image2)
+            let imagePieces = pieces.map { initial.images[$0]! }
+            images.images[opt] = merge(images: imagePieces)
         }
         return images
     }
     
-    func components(adjacency: Adjacency) -> [Adjacency] {
-        switch adjacency {
-        case [.left, .right]: return [.left, .right]
-        case [.top, .bottom]: return [.top, .bottom]
-        case [.top, .left, .right]: return [[.top, .right], .left]
-        case [.bottom, .left, .right]: return [[.bottom, .left], .right]
-        case [.top, .bottom, .right]: return [[.bottom, .right], .top]
-        case [.top, .bottom, .left]: return [[.bottom, .left], .top]
-        case [.top, .bottom, .left, .right]: return [[.bottom, .left], [.top, .right]]
-        default:
-            fatalError("Could not build tile for \(adjacency)")
+    func merge(images: [NSImage]) -> NSImage {
+        let mixed = mixImage(bottom: images[0], top: images[1])
+        if images.count == 2 {
+            return mixed
         }
+        let next = [mixed] + images.dropFirst(2)
+        return merge(images: next)
+    }
+    
+    func components(adjacency: Adjacency) -> [Adjacency] {
+        var result = sideComponents(adjacency: adjacency)
+        if adjacency.contains(.cornerTopLeft) {
+            result.append(.cornerTopLeft)
+        }
+        if adjacency.contains(.cornerTopRight) {
+            result.append(.cornerTopRight)
+        }
+        if adjacency.contains(.cornerBottomLeft) {
+            result.append(.cornerBottomLeft)
+        }
+        if adjacency.contains(.cornerBottomRight) {
+            result.append(.cornerBottomRight)
+        }
+        return result
+    }
+    
+    private func sideComponents(adjacency: Adjacency) -> [Adjacency] {
+        if adjacency.contains([.top, .bottom, .left, .right]) {
+            return [[.bottom, .left], [.top, .right]]
+        } else if adjacency.contains([.top, .bottom, .left]) {
+            return [[.bottom, .left], .top]
+        } else if adjacency.contains([.top, .bottom, .right]) {
+            return [[.bottom, .right], .top]
+        } else if adjacency.contains([.bottom, .left, .right]) {
+            return [[.bottom, .left], .right]
+        } else if adjacency.contains([.top, .left, .right]) {
+            return [[.top, .right], .left]
+        } else if adjacency.contains([.top, .bottom]) {
+            return [.top, .bottom]
+        } else if adjacency.contains([.left, .right]) {
+            return [.left, .right]
+        } else if adjacency.contains(.top) {
+            return [.top]
+        } else if adjacency.contains(.bottom) {
+            return [.bottom]
+        } else if adjacency.contains(.left) {
+            return [.left]
+        } else if adjacency.contains(.right) {
+            return [.right]
+        }
+        return []
     }
     
     private func mixImage(bottom: NSImage, top: NSImage) -> NSImage {

@@ -2,9 +2,3 @@
 
 import Foundation
 
-enum MapLayer: String, Identifiable, CaseIterable {
-    case bottom
-    case top
-    
-    var id: String { rawValue }
-}

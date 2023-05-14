@@ -7,16 +7,6 @@ import Terrain
 
 final class TerrainMixer {
     
-    /*func mix(bottom: TerrainImages, top: TerrainImages) -> MergedTerrainImages{
-        let background = bottom.images[.adjacencyAll]!
-        let merged = MergedTerrain(bottom: bottom.terrain, top: top.terrain)
-        var output = MergedTerrainImages(terrain: merged)
-        top.images.forEach { (key, value) in
-            output.images[key] = mixImage(bottom: background, top: value)
-        }
-        return output
-    }*/
-    
     func createMissing(initial: TerrainImages) -> TerrainImages {
         let allOptions = Adjacency.allOptions
         var images = TerrainImages(terrain: initial.terrain)

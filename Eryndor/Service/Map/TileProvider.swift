@@ -4,10 +4,21 @@ import Foundation
 import SpriteKit
 import Terrain
 
-protocol TileProvider {
-    static var tileSize: Int { get }
+struct TileProvider {
+    static var tileSize: Int = 128
     
-    var tileSet: SKTileSet { get }
+    let baseTileSet: TerrainTileSet<BaseTerrain> = .init()
+    let overlayTileSet: TerrainTileSet<OverlayTerrain> = .init()
     
-    func tile(for: AllTerrain) -> SKTileGroup
+    init() {
+        
+    }
+    
+    func tile(for terrain: OverlayTerrain) -> SKTileGroup {
+        return overlayTileSet.group(terrain)
+    }
+    
+    func tile(for terrain: BaseTerrain) -> SKTileGroup {
+        return baseTileSet.group(terrain)
+     }
 }

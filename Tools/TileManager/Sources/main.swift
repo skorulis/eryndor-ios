@@ -10,7 +10,7 @@ let sandMix = mixer.createMissing(initial: input.images(for: .sand))
 
 let defs = FullTerrainDefinition.generate()
 
-let codeWriter = CodeWriter(filename: URL(filePath: "/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Model/AllTerrain.swift"))
+let codeWriter = CodeWriter(filename: URL(filePath: "/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Model/OverlayTerrain.swift"))
 
 try codeWriter.write(defs: defs)
 

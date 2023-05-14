@@ -7,13 +7,13 @@ public final class ImageAccess {
     
     public static func image(terrain: BaseTerrain, adjacency: SKTileAdjacencyMask) -> NSImage? {
         let bundle = Bundle.workaround
-        let filename = terrain.rawValue + "_" + adjacency.fileExtension
+        let filename = terrain.baseName + "_" + adjacency.fileExtension
         return bundle.image(forResource: filename)
     }
     
     public static func image(terrain: BaseTerrain, adjacency: Adjacency) -> NSImage? {
         let bundle = Bundle.workaround
-        let filename = terrain.rawValue + adjacency.fileExtension
+        let filename = terrain.baseName + adjacency.fileExtension
         return bundle.image(forResource: filename)
     }
     

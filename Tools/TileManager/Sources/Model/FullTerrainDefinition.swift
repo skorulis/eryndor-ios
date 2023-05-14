@@ -11,7 +11,7 @@ struct FullTerrainDefinition: Codable {
     
     static func generate() -> [FullTerrainDefinition] {
         return BaseTerrain.allCases.reduce([]) { partialResult, terrain in
-            let nextID = (partialResult.map { $0.id }.max() ?? 0) + 1
+            let nextID = (partialResult.map { $0.id }.max() ?? 0)
             return partialResult + terrain.allDefinitions(baseID: nextID)
         }
     }
@@ -21,11 +21,14 @@ struct FullTerrainDefinition: Codable {
 extension BaseTerrain {
     
     func allDefinitions(baseID: Int) -> [FullTerrainDefinition] {
-        return Adjacency.allOptions.map { adj in
+        return Adjacency.allOptions.compactMap { adj in
+            if adj.rawValue == 0 {
+                return nil
+            }
             return FullTerrainDefinition(
-                name: "\(rawValue)\(adj.fileExtension)".replacingOccurrences(of: "_", with: ""),
+                name: "\(baseName)\(adj.fileExtension)".replacingOccurrences(of: "_", with: ""),
                 id: baseID + adj.rawValue,
-                filename: "\(rawValue)\(adj.fileExtension)"
+                filename: "\(baseName)\(adj.fileExtension)"
             )
         }
     }

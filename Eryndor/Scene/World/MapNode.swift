@@ -7,16 +7,16 @@ import Terrain
 
 final class MapNode: SKNode {
     
-    let tileProvider = BottomTileProvider()
-    let tileSize = CGSize(width: BottomTileProvider.tileSize, height: BottomTileProvider.tileSize)
+    let tileProvider = TileProvider()
+    let tileSize = CGSize(width: TileProvider.tileSize, height: TileProvider.tileSize)
     let columns = TerrainBlockRecord.blockSize
     let rows = TerrainBlockRecord.blockSize
     let bottomLayer: SKTileMapNode
     let topLayer: SKTileMapNode
     
     override init() {
-        bottomLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
-        topLayer = SKTileMapNode(tileSet: tileProvider.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+        bottomLayer = SKTileMapNode(tileSet: tileProvider.baseTileSet.tileSet, columns: columns, rows: rows, tileSize: tileSize)
+        topLayer = SKTileMapNode(tileSet: tileProvider.overlayTileSet.tileSet, columns: columns, rows: rows, tileSize: tileSize)
         
         super.init()
         addChild(bottomLayer)

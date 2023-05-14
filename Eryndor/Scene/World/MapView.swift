@@ -80,7 +80,7 @@ extension MapView: View {
     
     private var layerPicker: some View {
         Picker("", selection: $viewModel.layer) {
-            ForEach(MapLayer.allCases) { layer in
+            ForEach(TerrainLayer.allCases) { layer in
                 Text(layer.rawValue)
                     .tag(layer)
             }
@@ -91,7 +91,7 @@ extension MapView: View {
     
     private var terrainPicker: some View {
         Picker("", selection: $viewModel.brushType) {
-            ForEach(AllTerrain.allCases, id:\.filename) { type in
+            ForEach(BaseTerrain.allCases, id:\.filename) { type in
                 HStack {
                     Image(nsImage: type.image)
                         .resizable()

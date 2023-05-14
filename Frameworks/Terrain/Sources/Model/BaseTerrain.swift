@@ -2,21 +2,19 @@
 
 import Foundation
 
-public enum BaseTerrain: String, CaseIterable {
-    case grass = "Grass"
-    case sand = "Sand"
-}
-
-public struct MergedTerrain {
-    public let bottom: BaseTerrain
-    public let top: BaseTerrain
+public enum BaseTerrain: Int, Codable, CaseIterable, TileSetEnum {
+    case grass = 1
+    case sand = 2
     
-    public init(bottom: BaseTerrain, top: BaseTerrain) {
-        self.bottom = bottom
-        self.top = top
+    public var baseName: String {
+        switch self {
+        case .grass: return "Grass"
+        case .sand: return "Sand"
+        }
     }
     
-    public var name: String {
-        return "\(bottom.rawValue)_\(top.rawValue)"
+    public var filename: String {
+        return "\(baseName)_Center"
     }
+    
 }

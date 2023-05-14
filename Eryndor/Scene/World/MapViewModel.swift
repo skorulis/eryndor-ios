@@ -11,8 +11,8 @@ final class MapViewModel: ObservableObject {
         }
     }
     
-    @Published var brushType: AllTerrain = .SandCenter
-    @Published var layer: MapLayer = .bottom
+    @Published var brushType: BaseTerrain = .sand
+    @Published var layer: TerrainLayer = .base
     
     let scene = MapScene()
     let sqlStore: SQLStore
@@ -49,12 +49,13 @@ extension MapViewModel {
             var block = await terrainManager.block(for: coord)
             var square = block.square(at: coord)
             switch layer {
-            case .top:
-                square.top = self.brushType
-                await scene.map.topLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
-            case .bottom:
+            case .base:
                 square.bottom = self.brushType
                 await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
+            case .overlay:
+                break
+                //square.top = self.brushType
+                //await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             }
             chunk.set(square: square, coord: coord)
             await terrainManager.update(chunk: chunk)
@@ -63,9 +64,9 @@ extension MapViewModel {
     
     private var tileProvider: TileProvider {
         switch layer {
-        case .bottom:
+        case .base:
             return scene.map.tileProvider
-        case .top:
+        case .overlay:
             return scene.map.tileProvider
         }
     }

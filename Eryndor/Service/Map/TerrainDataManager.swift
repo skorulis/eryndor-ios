@@ -31,7 +31,7 @@ extension TerrainDataManager {
         }
         
         return try! await sqlStore.dbQueue.write { db in
-            var created = TerrainBlockRecord(coord: coord, bottomTerrain: .GrassCenter)
+            var created = TerrainBlockRecord(coord: coord, bottomTerrain: .grass)
             try created.insert(db)
             return created
         }

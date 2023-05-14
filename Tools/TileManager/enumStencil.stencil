@@ -1,6 +1,6 @@
 // Generated code. DO NOT EDIT
 
-public enum AllTerrain: Int, CaseIterable, Codable {
+public enum OverlayTerrain: Int, CaseIterable, Codable, TileSetEnum {
 {% for terrain in files[0].document.data %}
 	case {{terrain.name}} = {{terrain.id}}
 {% endfor %}

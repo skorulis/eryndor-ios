@@ -17,7 +17,7 @@ struct TerrainBlockRecord: Codable, Identifiable {
     var id: String { return coord.id }
     var coord: Coord { Coord(x: x, y: y) }
     
-    init(coord: Coord, bottomTerrain: AllTerrain) {
+    init(coord: Coord, bottomTerrain: BaseTerrain) {
         self.x = coord.x
         self.y = coord.y
         self.block = TerrainBlockRecord.new(bottomTerrain: bottomTerrain)
@@ -42,7 +42,7 @@ struct TerrainBlockRecord: Codable, Identifiable {
         block.rows[l.y].squares[l.x] = square
     }
     
-    static func new(bottomTerrain: AllTerrain) -> TerrainBlock {
+    static func new(bottomTerrain: BaseTerrain) -> TerrainBlock {
         let squares = (0..<TerrainBlockRecord.blockSize).map { _ in
             return MapSquare(bottom: bottomTerrain, top: nil)
         }
@@ -85,6 +85,6 @@ struct MapRow: Codable {
 
 struct MapSquare: Codable {
     
-    var bottom: AllTerrain
-    var top: AllTerrain?
+    var bottom: BaseTerrain
+    var top: OverlayTerrain?
 }

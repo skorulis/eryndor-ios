@@ -14,12 +14,5 @@ struct TerrainImages: TerrainContainer {
     let terrain: BaseTerrain
     var images: [Adjacency: NSImage] = [:]
     
-    var baseName: String { terrain.rawValue }
-}
-
-struct MergedTerrainImages: TerrainContainer {
-    let terrain: MergedTerrain
-    var images: [Adjacency: NSImage] = [:]
-    
-    var baseName: String { terrain.name }
+    var baseName: String { terrain.baseName }
 }

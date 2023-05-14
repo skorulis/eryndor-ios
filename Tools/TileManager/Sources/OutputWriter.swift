@@ -14,7 +14,7 @@ struct OutputWriter {
             let folder = baseDir.appending(path: "\(merged.terrain.rawValue)\(key.fileExtension).imageset")
             try fileManager.createDirectory(at: folder, withIntermediateDirectories: true)
             
-            let filename = merged.terrain.rawValue + "_" + key.fileExtension + ".png"
+            let filename = merged.terrain.baseName + "_" + key.fileExtension + ".png"
             let fullPath = folder.appending(path: filename)
             let contentsPath = folder.appending(path: "Contents.json")
             let imageRep = NSBitmapImageRep(data: value.tiffRepresentation!)!

@@ -46,8 +46,7 @@ extension MapViewModel {
         Task {
             var chunk = await terrainManager.chunk(coord: coord, radius: 2)
             let tileGroup = tileProvider.tile(for: brushType)
-            var block = await terrainManager.block(for: coord)
-            var square = block.square(at: coord)
+            var square = chunk.square(at: coord)
             switch layer {
             case .base:
                 square.bottom = self.brushType
@@ -55,10 +54,33 @@ extension MapViewModel {
             case .overlay:
                 break
                 //square.top = self.brushType
-                //await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
+                // await scene.map.topLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             }
             chunk.set(square: square, coord: coord)
             await terrainManager.update(chunk: chunk)
+            for x in -1...1 {
+                for y in -1...1 {
+                    await self.updateOverlay(at: Coord(x: coord.x + x, y: coord.y + y))
+                }
+            }
+            
+        }
+    }
+    
+    private func updateOverlay(at coord: Coord) async {
+        var chunk = await terrainManager.chunk(coord: coord, radius: 1)
+        var square = chunk.square(at: coord)
+        if square.bottom == .grass {
+            square.top = nil
+            chunk.set(square: square, coord: coord)
+            await scene.map.topLayer.setTileGroup(nil, forColumn: coord.x, row: coord.y)
+        } else {
+            let adj = chunk.adjacency(coord: coord, terrain: .grass)
+            let overlay = OverlayTerrain.match(base: .grass, adjacency: adj)
+            let group = overlay.map { tileProvider.tile(for: $0) }
+            chunk.set(overlay: overlay, coord: coord)
+            await terrainManager.update(chunk: chunk)
+            await scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)
         }
     }
     

@@ -23,15 +23,3 @@ struct MergedTerrainImages: TerrainContainer {
     
     var baseName: String { terrain.name }
 }
-
-extension TerrainContainer {
-    func definitions(baseID: Int) -> [FullTerrainDefinition] {
-        return images.map { key, _ in
-            return FullTerrainDefinition(
-                name: "\(baseName)\(key.fileExtension)",
-                id: baseID + key.idOffset,
-                filename: "\(baseName)_\(key.fileExtension)"
-            )
-        }
-    }
-}

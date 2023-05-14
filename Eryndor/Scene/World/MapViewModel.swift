@@ -11,7 +11,7 @@ final class MapViewModel: ObservableObject {
         }
     }
     
-    @Published var brushType: AllTerrain = .GrassGridUp
+    @Published var brushType: AllTerrain = .SandCenter
     @Published var layer: MapLayer = .bottom
     
     let scene = MapScene()
@@ -64,7 +64,7 @@ extension MapViewModel {
     private var tileProvider: TileProvider {
         switch layer {
         case .bottom:
-            return scene.map.bottomTileProvider
+            return scene.map.tileProvider
         case .top:
             return scene.map.tileProvider
         }

@@ -11,8 +11,8 @@ class MapScene: SKScene {
     
     override func didMove(to view: SKView) {
         addChild(map)
-        map.xScale = 0.2
-        map.yScale = 0.2
+        map.xScale = 0.4
+        map.yScale = 0.4
         scaleMode = .aspectFill
     }
     

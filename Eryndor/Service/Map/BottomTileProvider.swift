@@ -22,8 +22,8 @@ struct BottomTileProvider: TileProvider {
     
     func tile(for type: BaseTerrain) -> SKTileGroup {
         switch type {
-        case .grass: return newTileSet.group(.GrassGridCenter)
-        case .sand: return newTileSet.group(.SandGridCenter)
+        case .grass: return newTileSet.group(.GrassCenter)
+        case .sand: return newTileSet.group(.SandCenter)
         }
     }
 }

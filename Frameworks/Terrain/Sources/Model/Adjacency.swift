@@ -9,14 +9,22 @@ public struct Adjacency: OptionSet, Hashable {
         self.rawValue = rawValue
     }
     
-    public static let top  = Adjacency(rawValue: 1 << 0)
-    public static let bottom  = Adjacency(rawValue: 1 << 1)
-    public static let left  = Adjacency(rawValue: 1 << 2)
-    public static let right  = Adjacency(rawValue: 1 << 3)
+    public static let top       = Adjacency(rawValue: 1 << 0)
+    public static let bottom    = Adjacency(rawValue: 1 << 1)
+    public static let left      = Adjacency(rawValue: 1 << 2)
+    public static let right     = Adjacency(rawValue: 1 << 3)
+    
+    public static let cornerTopLeft = Adjacency(rawValue: 1 << 4)
+    public static let cornerTopRight = Adjacency(rawValue: 1 << 5)
+    public static let cornerBottomLeft = Adjacency(rawValue: 1 << 6)
+    public static let cornerBottomRight = Adjacency(rawValue: 1 << 7)
     
     static let all: Adjacency = [.top, .left, .bottom, .right]
     
     public var fileExtension: String {
+        if rawValue == 0 {
+            return "_Center"
+        }
         var result = ""
         if self.contains(Self.top) {
             result += "_Top"
@@ -29,6 +37,18 @@ public struct Adjacency: OptionSet, Hashable {
         }
         if self.contains(Self.right) {
             result += "_Right"
+        }
+        if self.contains(Self.cornerTopLeft) {
+            result += "_CnrTopLeft"
+        }
+        if self.contains(Self.cornerTopRight) {
+            result += "_CnrTopRight"
+        }
+        if self.contains(Self.cornerBottomLeft) {
+            result += "_CnrBottomLeft"
+        }
+        if self.contains(Self.cornerBottomRight) {
+            result += "_CnrBottomRight"
         }
         return result
     }
@@ -43,6 +63,10 @@ public struct Adjacency: OptionSet, Hashable {
             [.top, .right],
             [.bottom, .left],
             [.bottom, .right],
+            .cornerTopLeft,
+            .cornerTopRight,
+            .cornerBottomLeft,
+            .cornerBottomRight
         ]
     }
     

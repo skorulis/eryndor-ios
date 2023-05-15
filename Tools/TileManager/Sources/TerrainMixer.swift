@@ -14,7 +14,7 @@ final class TerrainMixer {
             guard initial.images[opt] == nil, opt.rawValue != 0 else {
                 continue
             }
-            let pieces = components(adjacency: opt)
+            let pieces = opt.components
             let imagePieces = pieces.map { initial.images[$0]! }
             images.images[opt] = merge(images: imagePieces)
         }
@@ -28,50 +28,6 @@ final class TerrainMixer {
         }
         let next = [mixed] + images.dropFirst(2)
         return merge(images: next)
-    }
-    
-    func components(adjacency: Adjacency) -> [Adjacency] {
-        var result = sideComponents(adjacency: adjacency)
-        if adjacency.contains(.cornerTopLeft) {
-            result.append(.cornerTopLeft)
-        }
-        if adjacency.contains(.cornerTopRight) {
-            result.append(.cornerTopRight)
-        }
-        if adjacency.contains(.cornerBottomLeft) {
-            result.append(.cornerBottomLeft)
-        }
-        if adjacency.contains(.cornerBottomRight) {
-            result.append(.cornerBottomRight)
-        }
-        return result
-    }
-    
-    private func sideComponents(adjacency: Adjacency) -> [Adjacency] {
-        if adjacency.contains([.top, .bottom, .left, .right]) {
-            return [[.bottom, .left], [.top, .right]]
-        } else if adjacency.contains([.top, .bottom, .left]) {
-            return [[.bottom, .left], .top]
-        } else if adjacency.contains([.top, .bottom, .right]) {
-            return [[.bottom, .right], .top]
-        } else if adjacency.contains([.bottom, .left, .right]) {
-            return [[.bottom, .left], .right]
-        } else if adjacency.contains([.top, .left, .right]) {
-            return [[.top, .right], .left]
-        } else if adjacency.contains([.top, .bottom]) {
-            return [.top, .bottom]
-        } else if adjacency.contains([.left, .right]) {
-            return [.left, .right]
-        } else if adjacency.contains(.top) {
-            return [.top]
-        } else if adjacency.contains(.bottom) {
-            return [.bottom]
-        } else if adjacency.contains(.left) {
-            return [.left]
-        } else if adjacency.contains(.right) {
-            return [.right]
-        }
-        return []
     }
     
     private func mixImage(bottom: NSImage, top: NSImage) -> NSImage {

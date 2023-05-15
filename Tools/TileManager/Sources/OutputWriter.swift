@@ -11,7 +11,7 @@ struct OutputWriter {
     func write(merged: TerrainImages) throws {
         let fileManager = FileManager.default
         for (key, value) in merged.images {
-            let folder = baseDir.appending(path: "\(merged.terrain.rawValue)\(key.fileExtension).imageset")
+            let folder = baseDir.appending(path: "\(merged.terrain.baseName)\(key.fileExtension).imageset")
             try fileManager.createDirectory(at: folder, withIntermediateDirectories: true)
             
             let filename = merged.terrain.baseName + "_" + key.fileExtension + ".png"

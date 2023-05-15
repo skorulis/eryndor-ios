@@ -29,28 +29,28 @@ public struct TerrainChunk {
     func adjacency(coord: Coord, terrain: BaseTerrain) -> Adjacency {
         var result: Adjacency = .init(rawValue: 0)
         
-        if rows[2].squares[1].bottom == terrain {
+        if square(at: coord + (0,1)).bottom == terrain {
             result.formUnion(.top)
         }
-        if rows[0].squares[1].bottom == terrain {
+        if square(at: coord + (0,-1)).bottom == terrain {
             result.formUnion(.bottom)
         }
-        if rows[1].squares[0].bottom == terrain {
+        if square(at: coord + (-1,0)).bottom == terrain {
             result.formUnion(.left)
         }
-        if rows[1].squares[2].bottom == terrain {
+        if square(at: coord + (1,0)).bottom == terrain {
             result.formUnion(.right)
         }
-        if rows[2].squares[0].bottom == terrain && !result.contains(.top) && !result.contains(.left) {
+        if square(at: coord + (-1,1)).bottom == terrain && !result.contains(.top) && !result.contains(.left) {
             result.formUnion(.cornerTopLeft)
         }
-        if rows[0].squares[0].bottom == terrain && !result.contains(.bottom) && !result.contains(.left) {
+        if square(at: coord + (-1,-1)).bottom == terrain && !result.contains(.bottom) && !result.contains(.left) {
             result.formUnion(.cornerBottomLeft)
         }
-        if rows[2].squares[2].bottom == terrain && !result.contains(.top) && !result.contains(.right) {
+        if square(at: coord + (1,1)).bottom == terrain && !result.contains(.top) && !result.contains(.right) {
             result.formUnion(.cornerTopRight)
         }
-        if rows[0].squares[2].bottom == terrain && !result.contains(.bottom) && !result.contains(.right) {
+        if square(at: coord + (1,-1)).bottom == terrain && !result.contains(.bottom) && !result.contains(.right) {
             result.formUnion(.cornerBottomRight)
         }
         

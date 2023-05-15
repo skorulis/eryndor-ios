@@ -42,6 +42,7 @@ extension MapViewModel {
     func tap(location: CGPoint) {
         let converted = CGPoint(x: location.x, y: scene.size.height - location.y)
         let coord = scene.coord(position: converted)
+        print("Update \(coord)")
         
         Task {
             var chunk = await terrainManager.chunk(coord: coord, radius: 2)
@@ -57,18 +58,16 @@ extension MapViewModel {
                 // await scene.map.topLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             }
             chunk.set(square: square, coord: coord)
-            await terrainManager.update(chunk: chunk)
             for x in -1...1 {
                 for y in -1...1 {
-                    await self.updateOverlay(at: Coord(x: coord.x + x, y: coord.y + y))
+                    await self.updateOverlay(at: Coord(x: coord.x + x, y: coord.y + y), chunk: &chunk)
                 }
             }
-            
+            await terrainManager.update(chunk: chunk)
         }
     }
     
-    private func updateOverlay(at coord: Coord) async {
-        var chunk = await terrainManager.chunk(coord: coord, radius: 1)
+    private func updateOverlay(at coord: Coord, chunk: inout TerrainChunk) async {
         var square = chunk.square(at: coord)
         if square.bottom == .grass {
             square.top = nil
@@ -79,7 +78,6 @@ extension MapViewModel {
             let overlay = OverlayTerrain.match(base: .grass, adjacency: adj)
             let group = overlay.map { tileProvider.tile(for: $0) }
             chunk.set(overlay: overlay, coord: coord)
-            await terrainManager.update(chunk: chunk)
             await scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)
         }
     }

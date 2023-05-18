@@ -14,6 +14,8 @@ final class MapViewModel: ObservableObject {
     @Published var brushType: BaseTerrain = .sand
     @Published var layer: TerrainLayer = .base
     
+    @Published var history: [EditHistory] = []
+    
     let scene = MapScene()
     let sqlStore: SQLStore
     let terrainManager: TerrainDataManager
@@ -24,7 +26,6 @@ final class MapViewModel: ObservableObject {
         Task {
             await scene.map.apply(block: terrainManager.block(for: .zero))
         }
-        
     }
     
 }
@@ -45,12 +46,22 @@ extension MapViewModel {
         print("Update \(coord)")
         
         Task {
-            var chunk = await terrainManager.chunk(coord: coord, radius: 2)
-            let tileGroup = tileProvider.tile(for: brushType)
-            var square = chunk.square(at: coord)
+            let square = await terrainManager.square(at: coord)
+            history.append(EditHistory(coord: coord, terrain: square.bottom))
+            let op = EditHistory(coord: coord, terrain: brushType)
+            apply(op: op)
+        }
+    }
+    
+    private func apply(op: EditHistory) {
+        Task {
+            let coord = op.coord
+            var chunk = await self.terrainManager.chunk(coord: coord, radius: 2)
+            let tileGroup = tileProvider.tile(for: op.terrain)
+            var square = chunk.square(at: op.coord)
             switch layer {
             case .base:
-                square.bottom = self.brushType
+                square.bottom = op.terrain
                 await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             case .overlay:
                 break
@@ -80,6 +91,13 @@ extension MapViewModel {
             chunk.set(overlay: overlay, coord: coord)
             await scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)
         }
+    }
+    
+    func undo() {
+        guard let item = history.popLast() else {
+            return
+        }
+        
     }
     
     private var tileProvider: TileProvider {

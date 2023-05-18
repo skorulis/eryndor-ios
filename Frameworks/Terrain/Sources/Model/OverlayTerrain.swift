@@ -93,6 +93,52 @@ public enum OverlayTerrain: Int, CaseIterable, Codable, TileSetEnum {
 	case SandCnrTopLeftCnrBottomLeftCnrBottomRight = 448
 	case SandCnrTopRightCnrBottomLeftCnrBottomRight = 464
 	case SandCnrTopLeftCnrTopRightCnrBottomLeftCnrBottomRight = 480
+	case WaterTop = 481
+	case WaterBottom = 482
+	case WaterTopBottom = 483
+	case WaterLeft = 484
+	case WaterTopLeft = 485
+	case WaterBottomLeft = 486
+	case WaterTopBottomLeft = 487
+	case WaterRight = 488
+	case WaterTopRight = 489
+	case WaterBottomRight = 490
+	case WaterTopBottomRight = 491
+	case WaterLeftRight = 492
+	case WaterTopLeftRight = 493
+	case WaterBottomLeftRight = 494
+	case WaterTopBottomLeftRight = 495
+	case WaterCnrTopLeft = 496
+	case WaterBottomCnrTopLeft = 498
+	case WaterRightCnrTopLeft = 504
+	case WaterBottomRightCnrTopLeft = 506
+	case WaterCnrTopRight = 512
+	case WaterBottomCnrTopRight = 514
+	case WaterLeftCnrTopRight = 516
+	case WaterBottomLeftCnrTopRight = 518
+	case WaterCnrTopLeftCnrTopRight = 528
+	case WaterBottomCnrTopLeftCnrTopRight = 530
+	case WaterCnrBottomLeft = 544
+	case WaterTopCnrBottomLeft = 545
+	case WaterRightCnrBottomLeft = 552
+	case WaterTopRightCnrBottomLeft = 553
+	case WaterCnrTopLeftCnrBottomLeft = 560
+	case WaterRightCnrTopLeftCnrBottomLeft = 568
+	case WaterCnrTopRightCnrBottomLeft = 576
+	case WaterCnrTopLeftCnrTopRightCnrBottomLeft = 592
+	case WaterCnrBottomRight = 608
+	case WaterTopCnrBottomRight = 609
+	case WaterLeftCnrBottomRight = 612
+	case WaterTopLeftCnrBottomRight = 613
+	case WaterCnrTopLeftCnrBottomRight = 624
+	case WaterCnrTopRightCnrBottomRight = 640
+	case WaterLeftCnrTopRightCnrBottomRight = 644
+	case WaterCnrTopLeftCnrTopRightCnrBottomRight = 656
+	case WaterCnrBottomLeftCnrBottomRight = 672
+	case WaterTopCnrBottomLeftCnrBottomRight = 673
+	case WaterCnrTopLeftCnrBottomLeftCnrBottomRight = 688
+	case WaterCnrTopRightCnrBottomLeftCnrBottomRight = 704
+	case WaterCnrTopLeftCnrTopRightCnrBottomLeftCnrBottomRight = 720
 
 public var filename: String {
 	switch self {
@@ -188,6 +234,52 @@ public var filename: String {
 		case .SandCnrTopLeftCnrBottomLeftCnrBottomRight: return "Sand_CnrTopLeft_CnrBottomLeft_CnrBottomRight"
 		case .SandCnrTopRightCnrBottomLeftCnrBottomRight: return "Sand_CnrTopRight_CnrBottomLeft_CnrBottomRight"
 		case .SandCnrTopLeftCnrTopRightCnrBottomLeftCnrBottomRight: return "Sand_CnrTopLeft_CnrTopRight_CnrBottomLeft_CnrBottomRight"
+		case .WaterTop: return "Water_Top"
+		case .WaterBottom: return "Water_Bottom"
+		case .WaterTopBottom: return "Water_Top_Bottom"
+		case .WaterLeft: return "Water_Left"
+		case .WaterTopLeft: return "Water_Top_Left"
+		case .WaterBottomLeft: return "Water_Bottom_Left"
+		case .WaterTopBottomLeft: return "Water_Top_Bottom_Left"
+		case .WaterRight: return "Water_Right"
+		case .WaterTopRight: return "Water_Top_Right"
+		case .WaterBottomRight: return "Water_Bottom_Right"
+		case .WaterTopBottomRight: return "Water_Top_Bottom_Right"
+		case .WaterLeftRight: return "Water_Left_Right"
+		case .WaterTopLeftRight: return "Water_Top_Left_Right"
+		case .WaterBottomLeftRight: return "Water_Bottom_Left_Right"
+		case .WaterTopBottomLeftRight: return "Water_Top_Bottom_Left_Right"
+		case .WaterCnrTopLeft: return "Water_CnrTopLeft"
+		case .WaterBottomCnrTopLeft: return "Water_Bottom_CnrTopLeft"
+		case .WaterRightCnrTopLeft: return "Water_Right_CnrTopLeft"
+		case .WaterBottomRightCnrTopLeft: return "Water_Bottom_Right_CnrTopLeft"
+		case .WaterCnrTopRight: return "Water_CnrTopRight"
+		case .WaterBottomCnrTopRight: return "Water_Bottom_CnrTopRight"
+		case .WaterLeftCnrTopRight: return "Water_Left_CnrTopRight"
+		case .WaterBottomLeftCnrTopRight: return "Water_Bottom_Left_CnrTopRight"
+		case .WaterCnrTopLeftCnrTopRight: return "Water_CnrTopLeft_CnrTopRight"
+		case .WaterBottomCnrTopLeftCnrTopRight: return "Water_Bottom_CnrTopLeft_CnrTopRight"
+		case .WaterCnrBottomLeft: return "Water_CnrBottomLeft"
+		case .WaterTopCnrBottomLeft: return "Water_Top_CnrBottomLeft"
+		case .WaterRightCnrBottomLeft: return "Water_Right_CnrBottomLeft"
+		case .WaterTopRightCnrBottomLeft: return "Water_Top_Right_CnrBottomLeft"
+		case .WaterCnrTopLeftCnrBottomLeft: return "Water_CnrTopLeft_CnrBottomLeft"
+		case .WaterRightCnrTopLeftCnrBottomLeft: return "Water_Right_CnrTopLeft_CnrBottomLeft"
+		case .WaterCnrTopRightCnrBottomLeft: return "Water_CnrTopRight_CnrBottomLeft"
+		case .WaterCnrTopLeftCnrTopRightCnrBottomLeft: return "Water_CnrTopLeft_CnrTopRight_CnrBottomLeft"
+		case .WaterCnrBottomRight: return "Water_CnrBottomRight"
+		case .WaterTopCnrBottomRight: return "Water_Top_CnrBottomRight"
+		case .WaterLeftCnrBottomRight: return "Water_Left_CnrBottomRight"
+		case .WaterTopLeftCnrBottomRight: return "Water_Top_Left_CnrBottomRight"
+		case .WaterCnrTopLeftCnrBottomRight: return "Water_CnrTopLeft_CnrBottomRight"
+		case .WaterCnrTopRightCnrBottomRight: return "Water_CnrTopRight_CnrBottomRight"
+		case .WaterLeftCnrTopRightCnrBottomRight: return "Water_Left_CnrTopRight_CnrBottomRight"
+		case .WaterCnrTopLeftCnrTopRightCnrBottomRight: return "Water_CnrTopLeft_CnrTopRight_CnrBottomRight"
+		case .WaterCnrBottomLeftCnrBottomRight: return "Water_CnrBottomLeft_CnrBottomRight"
+		case .WaterTopCnrBottomLeftCnrBottomRight: return "Water_Top_CnrBottomLeft_CnrBottomRight"
+		case .WaterCnrTopLeftCnrBottomLeftCnrBottomRight: return "Water_CnrTopLeft_CnrBottomLeft_CnrBottomRight"
+		case .WaterCnrTopRightCnrBottomLeftCnrBottomRight: return "Water_CnrTopRight_CnrBottomLeft_CnrBottomRight"
+		case .WaterCnrTopLeftCnrTopRightCnrBottomLeftCnrBottomRight: return "Water_CnrTopLeft_CnrTopRight_CnrBottomLeft_CnrBottomRight"
 	}
 }
 

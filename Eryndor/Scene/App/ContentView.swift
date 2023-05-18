@@ -5,6 +5,7 @@
 //  Created by Alexander Skorulis on 16/4/2023.
 //
 
+import ASKCore
 import SwiftUI
 
 struct ContentView: View {
@@ -13,7 +14,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            MapView(viewModel: factory.resolve())
+            MapView(viewModel: factory.resolveMain())
         }
     }
 }

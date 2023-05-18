@@ -3,6 +3,7 @@
 import Foundation
 import Terrain
 
+@MainActor
 final class MapViewModel: ObservableObject {
     
     var windowSize: CGSize = .zero {
@@ -57,7 +58,7 @@ extension MapViewModel {
         Task {
             let coord = op.coord
             var chunk = await self.terrainManager.chunk(coord: coord, radius: 2)
-            let tileGroup = tileProvider.tile(for: op.terrain)
+            let tileGroup = self.tileProvider.tile(for: op.terrain)
             var square = chunk.square(at: op.coord)
             switch layer {
             case .base:
@@ -65,20 +66,22 @@ extension MapViewModel {
                 await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             case .overlay:
                 break
-                //square.top = self.brushType
-                // await scene.map.topLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             }
             chunk.set(square: square, coord: coord)
             for x in -1...1 {
                 for y in -1...1 {
-                    await self.updateOverlay(at: Coord(x: coord.x + x, y: coord.y + y), chunk: &chunk)
+                    await self.updateOverlay(
+                        at: Coord(x: coord.x + x, y: coord.y + y),
+                        brush: op.terrain,
+                        chunk: &chunk
+                    )
                 }
             }
             await terrainManager.update(chunk: chunk)
         }
     }
     
-    private func updateOverlay(at coord: Coord, chunk: inout TerrainChunk) async {
+    private func updateOverlay(at coord: Coord, brush: BaseTerrain, chunk: inout TerrainChunk) async {
         var square = chunk.square(at: coord)
         if square.bottom == .grass {
             square.top = nil
@@ -97,7 +100,7 @@ extension MapViewModel {
         guard let item = history.popLast() else {
             return
         }
-        
+        apply(op: item)
     }
     
     private var tileProvider: TileProvider {

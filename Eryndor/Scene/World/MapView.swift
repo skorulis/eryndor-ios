@@ -75,6 +75,9 @@ extension MapView: View {
             Spacer()
             terrainPicker
             layerPicker
+            Button(action: viewModel.undo) {
+                Text("Undo")
+            }
         }
     }
     

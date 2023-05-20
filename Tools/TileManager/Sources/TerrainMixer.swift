@@ -7,11 +7,12 @@ import Terrain
 
 final class TerrainMixer {
     
-    func createMissing(initial: TerrainImages) -> TerrainImages {
+    func generateImages(initial: TerrainImages) -> TerrainImages {
         let allOptions = Adjacency.allOptions
         var images = TerrainImages(terrain: initial.terrain)
         for opt in allOptions {
-            guard initial.images[opt] == nil, opt.rawValue != 0 else {
+            if let existing = initial.images[opt] {
+                images.images[opt] = existing
                 continue
             }
             let pieces = opt.components

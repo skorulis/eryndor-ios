@@ -4,12 +4,7 @@ import Foundation
 import SpriteKit
 import Terrain
 
-protocol TerrainContainer {
-    var images: [Adjacency: NSImage] { get }
-    var baseName: String { get }
-}
-
-struct TerrainImages: TerrainContainer {
+struct TerrainImages {
     
     let terrain: BaseTerrain
     var images: [Adjacency: NSImage] = [:]

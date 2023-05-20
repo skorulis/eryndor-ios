@@ -9,7 +9,7 @@ let mixer = TerrainMixer()
 let writer = OutputWriter(baseDir: URL(filePath:"/Users/alex/dev/ios/Eryndor/Frameworks/Terrain/Sources/Resource/Media.xcassets/Generated"))
 
 for terrain in BaseTerrain.allCases {
-    let output = mixer.createMissing(initial: input.images(for: terrain))
+    let output = mixer.generateImages(initial: input.images(for: terrain))
     try writer.write(merged: output)
 }
 

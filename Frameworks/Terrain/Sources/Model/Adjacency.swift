@@ -55,6 +55,7 @@ public struct Adjacency: OptionSet, Hashable {
     
     public static var inputAdjacency: [Adjacency] {
         return [
+            .init(rawValue: 0),
             .bottom,
             .top,
             .left,

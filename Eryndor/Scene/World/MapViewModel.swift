@@ -18,9 +18,6 @@ final class MapViewModel: ObservableObject {
             let coord = scene.coord(windowPosition: mouseLocation)
             let screenPosition = scene.windowPosition(coord: coord)
             scene.mouseIndicator.position = screenPosition
-            print(screenPosition)
-            
-            print(coord)
         }
     }
     
@@ -71,17 +68,12 @@ extension MapViewModel {
             var chunk = await self.terrainManager.chunk(coord: coord, radius: 2)
             let tileGroup = self.tileProvider.tile(for: op.terrain)
             var square = chunk.square(at: op.coord)
-            switch layer {
-            case .base:
-                square.bottom = op.terrain
-                scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
-            case .overlay:
-                break
-            }
+            square.bottom = op.terrain
+            scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             chunk.set(square: square, coord: coord)
             for x in -1...1 {
                 for y in -1...1 {
-                    await self.updateOverlay(
+                    self.updateOverlay(
                         at: Coord(x: coord.x + x, y: coord.y + y),
                         brush: op.terrain,
                         chunk: &chunk
@@ -92,18 +84,26 @@ extension MapViewModel {
         }
     }
     
-    private func updateOverlay(at coord: Coord, brush: BaseTerrain, chunk: inout TerrainChunk) async {
+    private func updateOverlay(at coord: Coord, brush: BaseTerrain, chunk: inout TerrainChunk) {
+        switch layer {
+        case .base:
+            let adjItems = chunk.allAdjacency(coord: coord, excluding: [brush])
+            updateOverlay(at: coord, thing: adjItems.keys.first, chunk: &chunk)
+        case .overlay:
+            updateOverlay(at: coord, thing: brush, chunk: &chunk)
+        }
+    }
+    
+    private func updateOverlay(at coord: Coord, thing: BaseTerrain?, chunk: inout TerrainChunk) {
         var square = chunk.square(at: coord)
-        let adjItems = chunk.allAdjacency(coord: coord, excluding: [brush])
-        
-        guard let anyAdj = adjItems.keys.first, square.bottom != anyAdj else {
+        guard let thing, square.bottom != thing else {
             square.top = nil
             chunk.set(square: square, coord: coord)
             scene.map.topLayer.setTileGroup(nil, forColumn: coord.x, row: coord.y)
             return
         }
-        let adj = chunk.adjacency(coord: coord, terrain: anyAdj)
-        let overlay = OverlayTerrain.match(base: anyAdj, adjacency: adj)
+        let adj = chunk.adjacency(coord: coord, terrain: thing)
+        let overlay = OverlayTerrain.match(base: thing, adjacency: adj)
         let group = overlay.map { tileProvider.tile(for: $0) }
         chunk.set(overlay: overlay, coord: coord)
         scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)

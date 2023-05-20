@@ -17,7 +17,8 @@ let package = Package(
             dependencies: [
                 "Terrain"
             ],
-            path: "Sources"
+            path: "Sources",
+            resources: [.process("Resource")]
         ),
     ]
 )

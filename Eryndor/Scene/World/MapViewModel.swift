@@ -83,17 +83,19 @@ extension MapViewModel {
     
     private func updateOverlay(at coord: Coord, brush: BaseTerrain, chunk: inout TerrainChunk) async {
         var square = chunk.square(at: coord)
-        if square.bottom == .grass {
+        let adjItems = chunk.allAdjacency(coord: coord, excluding: [brush])
+        
+        guard let anyAdj = adjItems.keys.first, square.bottom != anyAdj else {
             square.top = nil
             chunk.set(square: square, coord: coord)
-            await scene.map.topLayer.setTileGroup(nil, forColumn: coord.x, row: coord.y)
-        } else {
-            let adj = chunk.adjacency(coord: coord, terrain: .grass)
-            let overlay = OverlayTerrain.match(base: .grass, adjacency: adj)
-            let group = overlay.map { tileProvider.tile(for: $0) }
-            chunk.set(overlay: overlay, coord: coord)
-            await scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)
+            scene.map.topLayer.setTileGroup(nil, forColumn: coord.x, row: coord.y)
+            return
         }
+        let adj = chunk.adjacency(coord: coord, terrain: anyAdj)
+        let overlay = OverlayTerrain.match(base: anyAdj, adjacency: adj)
+        let group = overlay.map { tileProvider.tile(for: $0) }
+        chunk.set(overlay: overlay, coord: coord)
+        scene.map.topLayer.setTileGroup(group, forColumn: coord.x, row: coord.y)
     }
     
     func undo() {

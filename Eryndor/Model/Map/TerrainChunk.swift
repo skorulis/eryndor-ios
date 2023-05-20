@@ -26,6 +26,18 @@ public struct TerrainChunk {
         self.set(square: square, coord: coord)
     }
     
+    func allAdjacency(coord: Coord, excluding: [BaseTerrain]) -> [BaseTerrain: Adjacency] {
+        var result = [BaseTerrain: Adjacency]()
+        for terrain in BaseTerrain.allCases {
+            guard !excluding.contains(terrain) else { continue }
+            let adj = adjacency(coord: coord, terrain: terrain)
+            if adj.rawValue != 0 {
+                result[terrain] = adj
+            }
+        }
+        return result
+    }
+    
     func adjacency(coord: Coord, terrain: BaseTerrain) -> Adjacency {
         var result: Adjacency = .init(rawValue: 0)
         

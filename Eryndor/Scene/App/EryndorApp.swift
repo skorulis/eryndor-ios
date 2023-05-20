@@ -2,7 +2,6 @@
 
 import SwiftUI
 
-@main
 struct EryndorApp: App {
     
     private let ioc = IOC(purpose: .normal)

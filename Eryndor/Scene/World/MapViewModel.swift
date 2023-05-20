@@ -6,9 +6,21 @@ import Terrain
 @MainActor
 final class MapViewModel: ObservableObject {
     
-    var windowSize: CGSize = .zero {
+    var windowSize: CGSize = .init(width: 1280, height: 800) {
         didSet {
+            scene.size = windowSize
+        }
+    }
+    
+    var mouseLocation: CGPoint? {
+        didSet {
+            guard let mouseLocation else { return }
+            let coord = scene.coord(windowPosition: mouseLocation)
+            let screenPosition = scene.windowPosition(coord: coord)
+            scene.mouseIndicator.position = screenPosition
+            print(screenPosition)
             
+            print(coord)
         }
     }
     
@@ -42,8 +54,7 @@ extension MapViewModel {
 extension MapViewModel {
     
     func tap(location: CGPoint) {
-        let converted = CGPoint(x: location.x, y: scene.size.height - location.y)
-        let coord = scene.coord(position: converted)
+        let coord = scene.coord(windowPosition: location)
         print("Update \(coord)")
         
         Task {
@@ -63,7 +74,7 @@ extension MapViewModel {
             switch layer {
             case .base:
                 square.bottom = op.terrain
-                await scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
+                scene.map.bottomLayer.setTileGroup(tileGroup, forColumn: coord.x, row: coord.y)
             case .overlay:
                 break
             }

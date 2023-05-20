@@ -10,6 +10,7 @@ import Terrain
 struct MapView {
     @StateObject var viewModel: MapViewModel
     @Environment(\.windowSize) private var windowSize
+    @Environment(\.window) private var window
     
     @State private var originalTranslation: CGPoint?
     
@@ -30,6 +31,13 @@ extension MapView: View {
             
             controlsOverlay
         }
+        .onAppear(perform: {
+            viewModel.windowSize = windowSize
+            NSEvent.addLocalMonitorForEvents(matching: [.mouseMoved]) {
+                viewModel.mouseLocation = window.mouseLocationOutsideOfEventStream
+                return $0
+            }
+        })
         
     }
     
@@ -63,7 +71,6 @@ extension MapView: View {
                 .contentShape(Rectangle())
                 .allowsHitTesting(false)
                 .onChange(of: windowSize) { newValue in
-                    viewModel.scene.size = newValue
                     viewModel.windowSize = newValue
                 }
         }
